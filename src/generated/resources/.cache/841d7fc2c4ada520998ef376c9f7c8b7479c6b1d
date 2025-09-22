@@ -1,0 +1,10 @@
+// 1.21.1	2025-09-22T16:59:34.3920082	Tags for minecraft:block mod id enerjolt
+c68a78aeba1e49f15d2bcc89b9f4b825c2c1421c data/enerjolt/tags/block/incorrect_for_bismuth_tool.json
+799e79e4236f73610cf058640ed3679e8f7aa98a data/enerjolt/tags/block/needs_bismuth_tool.json
+1b2cc32d4a53aac382184250b5916dabd511cf88 data/minecraft/tags/block/fences.json
+160de7327785827af0d3b1d350b3fb4d2a8117e1 data/minecraft/tags/block/fence_gates.json
+5e58d0093dc4486b0a2a5538afb4e6632bb7a0aa data/minecraft/tags/block/logs_that_burn.json
+fe052d98c19ba8a7731efeea6ac87a002e87263b data/minecraft/tags/block/mineable/pickaxe.json
+ac871def7809c732aa0f4438ed0146181d17dc5e data/minecraft/tags/block/needs_diamond_tool.json
+2c9df78f7b90c7fd8c4fb85bbb6bd2da7d4b3f36 data/minecraft/tags/block/needs_iron_tool.json
+938ed396dd6edd110b133bbc124ec45a83c12032 data/minecraft/tags/block/walls.json

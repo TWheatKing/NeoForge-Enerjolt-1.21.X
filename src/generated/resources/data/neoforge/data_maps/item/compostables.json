@@ -1,9 +1,9 @@
 {
   "values": {
-    "tutorialmod:radish": {
+    "enerjolt:radish": {
       "chance": 0.45
     },
-    "tutorialmod:radish_seeds": {
+    "enerjolt:radish_seeds": {
       "chance": 0.25
     }
   }

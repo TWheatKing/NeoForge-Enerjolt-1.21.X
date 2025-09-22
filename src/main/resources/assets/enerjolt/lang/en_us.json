@@ -1,0 +1,113 @@
+{
+  "item.enerjolt.bismuth": "Bismuth",
+  "item.enerjolt.raw_bismuth": "Raw Bismuth",
+  "item.enerjolt.chisel": "Chisel",
+
+  "item.enerjolt.radish": "Radish",
+  "item.enerjolt.frostfire_ice": "Frostfire Ice",
+  "item.enerjolt.starlight_ashes": "Starlight Ashes",
+
+  "item.enerjolt.bismuth_sword": "Bismuth Sword",
+  "item.enerjolt.bismuth_pickaxe": "Bismuth Pickaxe",
+  "item.enerjolt.bismuth_shovel": "Bismuth Shovel",
+  "item.enerjolt.bismuth_axe": "Bismuth Axe",
+  "item.enerjolt.bismuth_hoe": "Bismuth Hoe",
+
+  "item.enerjolt.bismuth_hammer": "Bismuth Hammer",
+
+  "item.enerjolt.bismuth_helmet": "Bismuth Helmet",
+  "item.enerjolt.bismuth_chestplate": "Bismuth Chestplate",
+  "item.enerjolt.bismuth_leggings": "Bismuth Leggings",
+  "item.enerjolt.bismuth_boots": "Bismuth Boots",
+
+  "item.enerjolt.bismuth_horse_armor": "Bismuth Horse Armor",
+  "item.enerjolt.kaupen_armor_trim_smithing_template": "Kaupen Trim Template",
+
+  "item.enerjolt.kaupen_bow": "Kaupen Bow",
+
+  "item.enerjolt.bar_brawl_music_disc": "Bar Brawl Music Disc",
+  "item.enerjolt.bar_brawl_music_disc.desc": "Bryan Tech - Bar Brawl (CC0)",
+
+  "item.minecraft.potion.effect.slimey_potion": "Slimey Potion",
+  "item.minecraft.splash_potion.effect.slimey_potion": "Slimey Splash Potion",
+  "item.minecraft.lingering_potion.effect.slimey_potion": "Slimey Lingering Potion",
+
+  "item.enerjolt.radish_seeds": "Radish Seeds",
+  "item.enerjolt.goji_berries": "Goji Berries",
+
+  "item.enerjolt.gecko_spawn_egg": "Gecko Spawn Egg",
+
+  "item.enerjolt.tomahawk": "Tomahawk",
+  "item.enerjolt.radiation_staff": "Radiation Staff",
+
+
+  "block.enerjolt.bismuth_block": "Block of Bismuth",
+  "block.enerjolt.bismuth_ore": "Bismuth Ore",
+  "block.enerjolt.bismuth_deepslate_ore": "Bismuth Deepslate Ore",
+
+  "block.enerjolt.bismuth_end_ore": "Bismuth End Ore",
+  "block.enerjolt.bismuth_nether_ore": "Bismuth Nether Ore",
+
+  "block.enerjolt.magic_block": "Magic Block",
+
+  "block.enerjolt.bismuth_stairs": "Bismuth Stairs",
+  "block.enerjolt.bismuth_slab": "Bismuth Slab",
+
+  "block.enerjolt.bismuth_button": "Bismuth Button",
+  "block.enerjolt.bismuth_pressure_plate": "Bismuth Pressure Plate",
+
+  "block.enerjolt.bismuth_fence": "Bismuth Fence",
+  "block.enerjolt.bismuth_fence_gate": "Bismuth Fence Gate",
+  "block.enerjolt.bismuth_wall": "Bismuth Wall",
+
+  "block.enerjolt.bismuth_door": "Bismuth Door",
+  "block.enerjolt.bismuth_trapdoor": "Bismuth Trapdoor",
+
+  "block.enerjolt.bismuth_lamp": "Bismuth Lamp",
+
+  "block.enerjolt.radish_crop": "Radish Crop",
+  "block.enerjolt.goji_berry_bush": "Goji Berry Bush",
+
+  "block.enerjolt.bloodwood_log": "Bloodwood Log",
+  "block.enerjolt.bloodwood_planks": "Bloodwood Planks",
+  "block.enerjolt.bloodwood_wood": "Bloodwood Wood",
+  "block.enerjolt.stripped_bloodwood_log": "Stripped Bloodwood Log",
+  "block.enerjolt.stripped_bloodwood_wood": "Stripped Bloodwood Wood",
+  "block.enerjolt.bloodwood_leaves": "Bloodwood Leaves",
+
+  "block.enerjolt.bloodwood_sapling": "Bloodwood Sapling",
+  "block.enerjolt.chair": "Chair",
+  "block.enerjolt.pedestal": "Pedestal",
+  "block.enerjolt.growth_chamber": "Growth Chamber",
+
+
+  "entity.minecraft.villager.enerjolt.kaupenger": "Kaupenger",
+
+  "creativetab.enerjolt.bismuth_items": "Bismuth Items",
+  "creativetab.enerjolt.bismuth_blocks": "Bismuth Blocks",
+
+  "effect.enerjolt.slimey": "Slimey",
+
+  "painting.enerjolt.world.title": "World",
+  "painting.enerjolt.world.author": "NanoAttack",
+  "painting.enerjolt.shrimp.title": "Shrimp",
+  "painting.enerjolt.shrimp.author": "NanoAttack",
+  "painting.enerjolt.saw_them.title": "Saw Them",
+  "painting.enerjolt.saw_them.author": "NanoAttack",
+
+
+  "enchantment.enerjolt.lightning_striker": "Lightning Striker",
+
+  "tooltip.enerjolt.magic_block.tooltip": "This Block is very §9MAGICAL§r",
+
+  "tooltip.enerjolt.chisel.shift_down": "This Item can chisel Blocks into Bricks",
+  "tooltip.enerjolt.chisel": "Press §eShift§r for more Information",
+
+  "tooltip.enerjolt.radish.tooltip": "Tastes really great!",
+
+  "trim_pattern.enerjolt.kaupen": "Kaupen Armor Trim",
+  "trim_material.enerjolt.bismuth": "Bismuth Material",
+
+  "entity.mccourse.gecko": "Gecko",
+  "entity.mccourse.tomahawk": "Tomahawk"
+}

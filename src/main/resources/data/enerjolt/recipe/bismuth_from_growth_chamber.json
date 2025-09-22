@@ -1,0 +1,9 @@
+{
+  "type": "enerjolt:growth_chamber",
+  "ingredient": {
+    "item": "enerjolt:raw_bismuth"
+  },
+  "result": {
+    "id": "enerjolt:bismuth"
+  }
+}

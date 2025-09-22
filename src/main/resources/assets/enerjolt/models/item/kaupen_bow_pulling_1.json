@@ -1,0 +1,6 @@
+{
+    "parent": "enerjolt:item/kaupen_bow",
+    "textures": {
+        "layer0": "enerjolt:item/kaupen_bow_pulling_1"
+    }
+}

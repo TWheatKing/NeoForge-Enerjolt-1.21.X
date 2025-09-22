@@ -2,7 +2,6 @@ package com.crofty.enerjolt.block;
 
 import com.crofty.enerjolt.Enerjolt;
 import com.crofty.enerjolt.block.custom.*;
-import net.kaupenjoe.tutorialmod.block.custom.*;
 import com.crofty.enerjolt.item.ModItems;
 import com.crofty.enerjolt.sound.ModSounds;
 import com.crofty.enerjolt.worldgen.tree.ModTreeGrowers;

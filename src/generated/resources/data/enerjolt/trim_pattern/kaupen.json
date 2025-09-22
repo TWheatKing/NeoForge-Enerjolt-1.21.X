@@ -1,0 +1,8 @@
+{
+  "asset_id": "enerjolt:kaupen",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.enerjolt.kaupen"
+  },
+  "template_item": "enerjolt:kaupen_armor_trim_smithing_template"
+}

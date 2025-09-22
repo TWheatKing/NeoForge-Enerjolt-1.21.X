@@ -4,7 +4,6 @@ import com.crofty.enerjolt.Enerjolt;
 import com.crofty.enerjolt.block.ModBlocks;
 import com.crofty.enerjolt.entity.ModEntities;
 import com.crofty.enerjolt.item.custom.*;
-import net.kaupenjoe.tutorialmod.item.custom.*;
 import com.crofty.enerjolt.sound.ModSounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

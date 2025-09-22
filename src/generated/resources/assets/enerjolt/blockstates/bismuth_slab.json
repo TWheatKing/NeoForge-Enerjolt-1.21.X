@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "enerjolt:block/bismuth_slab"
+    },
+    "type=double": {
+      "model": "enerjolt:block/bismuth_block"
+    },
+    "type=top": {
+      "model": "enerjolt:block/bismuth_slab_top"
+    }
+  }
+}

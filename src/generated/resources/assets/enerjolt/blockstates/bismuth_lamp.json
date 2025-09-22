@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "clicked=false": {
+      "model": "enerjolt:block/bismuth_lamp_off"
+    },
+    "clicked=true": {
+      "model": "enerjolt:block/bismuth_lamp_on"
+    }
+  }
+}
