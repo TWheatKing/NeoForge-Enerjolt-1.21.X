@@ -39,7 +39,7 @@ public class GrowthChamberRecipeCategory implements IRecipeCategory<GrowthChambe
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.tutorialmod.growth_chamber");
+        return Component.translatable("block.enerjolt.growth_chamber");
     }
 
     @Override
