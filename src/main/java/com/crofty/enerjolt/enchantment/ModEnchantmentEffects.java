@@ -1,5 +1,6 @@
 package com.crofty.enerjolt.enchantment;
 
+import com.crofty.enerjolt.enchantment.custom.BreedingParticlesEffect;
 import com.mojang.serialization.MapCodec;
 import com.crofty.enerjolt.Enerjolt;
 import com.crofty.enerjolt.enchantment.custom.LightningStrikerEnchantmentEffect;
@@ -16,6 +17,9 @@ public class ModEnchantmentEffects {
 
     public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> LIGHTNING_STRIKER =
             ENTITY_ENCHANTMENT_EFFECTS.register("lightning_striker", () -> LightningStrikerEnchantmentEffect.CODEC);
+
+    public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> BREEDING_PARTICLES =
+            ENTITY_ENCHANTMENT_EFFECTS.register("breeding_particles", () -> BreedingParticlesEffect.CODEC);
 
     public static void register(IEventBus eventBus) {
         ENTITY_ENCHANTMENT_EFFECTS.register(eventBus);

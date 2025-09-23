@@ -36,8 +36,8 @@
         "trims/models/armor/raiser_leggings",
         "trims/models/armor/host",
         "trims/models/armor/host_leggings",
-        "enerjolt:trims/models/armor/kaupen",
-        "enerjolt:trims/models/armor/kaupen_leggings"
+        "enerjolt:trims/models/armor/zinc",
+        "enerjolt:trims/models/armor/zinc_leggings"
 
       ],
       "palette_key": "trims/color_palettes/trim_palette",
@@ -56,7 +56,7 @@
         "gold_darker": "trims/color_palettes/gold_darker",
         "diamond_darker": "trims/color_palettes/diamond_darker",
         "netherite_darker": "trims/color_palettes/netherite_darker",
-        "bismuth": "enerjolt:trims/color_palettes/bismuth"
+        "zinc": "enerjolt:trims/color_palettes/zinc"
       }
     }
   ]

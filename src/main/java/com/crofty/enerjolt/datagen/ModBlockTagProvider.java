@@ -48,5 +48,25 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(ModBlocks.BLOODWOOD_WOOD.get())
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
                 .add(ModBlocks.STRIPPED_BLOODWOOD_WOOD.get());
+
+        //my stuff
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(ModBlocks.ZINC_ORE.get())
+                .add(ModBlocks.ZINC_DEEPSLATE_ORE.get())
+                .add(ModBlocks.ZINC_BLOCK.get());
+
+        tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(ModBlocks.ZINC_DEEPSLATE_ORE.get());
+
+        tag(BlockTags.FENCES).add(ModBlocks.ZINC_FENCE.get());
+        tag(BlockTags.FENCE_GATES).add(ModBlocks.ZINC_FENCE_GATE.get());
+        tag(BlockTags.WALLS).add(ModBlocks.ZINC_WALL.get());
+
+        tag(ModTags.Blocks.NEEDS_ZINC_TOOL)
+                .addTag(BlockTags.NEEDS_IRON_TOOL);
+
+        tag(ModTags.Blocks.INCORRECT_FOR_ZINC_TOOL)
+                .addTag(BlockTags.INCORRECT_FOR_IRON_TOOL)
+                .remove(ModTags.Blocks.NEEDS_ZINC_TOOL);
     }
 }

@@ -1,6 +1,9 @@
-// 1.21.1	2025-09-22T16:59:34.3935067	Global Loot Modifiers : enerjolt
+// 1.21.1	2025-09-23T01:49:04.1574842	Global Loot Modifiers : enerjolt
 f9cfd308863b103ad802a642792b1cb3dd8c1395 data/enerjolt/loot_modifiers/berry_from_creeper.json
 008f1f8060435a8514eb3306a8fe31bf5cd10638 data/enerjolt/loot_modifiers/chisel_from_jungle_temple.json
+f27e6769dababf41637048ef48b7727047911e05 data/enerjolt/loot_modifiers/corn_seeds_to_short_grass.json
+e496162bdd4366f9555b783543c13f08f0a61bbd data/enerjolt/loot_modifiers/corn_seeds_to_tall_grass.json
 e825aad60677c50308588c6a9076fb4eef910e32 data/enerjolt/loot_modifiers/radish_seeds_to_short_grass.json
 ace0bdbc66bc6b4d86f9a3a733158ab899ac5615 data/enerjolt/loot_modifiers/radish_seeds_to_tall_grass.json
-06df5d4c77de4179e6b37e4b1ec37316284d8545 data/neoforge/loot_modifiers/global_loot_modifiers.json
+a8bc79e2d34d5ac9b3794d7c5055bf9ef75fd95b data/enerjolt/loot_modifiers/strawberry_from_rabbit.json
+5cdca8c0ad2d1711169a4c503a7d777e33f03e4f data/neoforge/loot_modifiers/global_loot_modifiers.json

@@ -2,9 +2,7 @@ package com.crofty.enerjolt.datagen;
 
 import com.crofty.enerjolt.Enerjolt;
 import com.crofty.enerjolt.block.ModBlocks;
-import com.crofty.enerjolt.block.custom.BismuthLampBlock;
-import com.crofty.enerjolt.block.custom.GojiBerryBushBlock;
-import com.crofty.enerjolt.block.custom.RadishCropBlock;
+import com.crofty.enerjolt.block.custom.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +11,8 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -54,8 +54,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.BISMUTH_FENCE_GATE);
         blockItem(ModBlocks.BISMUTH_TRAPDOOR, "_bottom");
 
-        customLamp();
-
         makeCrop(((CropBlock) ModBlocks.RADISH_CROP.get()), "radish_crop_stage", "radish_crop_stage");
         makeBush(((SweetBerryBushBlock) ModBlocks.GOJI_BERRY_BUSH.get()), "goji_berry_bush_stage", "goji_berry_bush_stage");
 
@@ -78,17 +76,58 @@ public class ModBlockStateProvider extends BlockStateProvider {
         saplingBlock(ModBlocks.BLOODWOOD_SAPLING);
 
         blockWithItem(ModBlocks.GROWTH_CHAMBER);
+
+        //my stuff
+
+        blockWithItem(ModBlocks.ZINC_ORE);
+        blockWithItem(ModBlocks.ZINC_DEEPSLATE_ORE);
+        blockWithItem(ModBlocks.ZINC_END_ORE);
+        blockWithItem(ModBlocks.ZINC_NETHER_ORE);
+        blockWithItem(ModBlocks.ZINC_BLOCK);
+        blockWithItem(ModBlocks.ZINC_CASING);
+        blockWithItem(ModBlocks.ANDESITE_CASING);
+        blockWithItem(ModBlocks.WHEAT_INGOT_BLOCK);
+
+        stairsBlock(ModBlocks.ZINC_STAIRS.get(), blockTexture(ModBlocks.ZINC_BLOCK.get()));
+        slabBlock(ModBlocks.ZINC_SLAB.get(), blockTexture(ModBlocks.ZINC_BLOCK.get()), blockTexture(ModBlocks.ZINC_BLOCK.get()));
+
+        buttonBlock(ModBlocks.ZINC_BUTTON.get(), blockTexture(ModBlocks.ZINC_BLOCK.get()));
+        pressurePlateBlock(ModBlocks.ZINC_PRESSURE_PLATE.get(), blockTexture(ModBlocks.ZINC_BLOCK.get()));
+        fenceGateBlock(ModBlocks.ZINC_FENCE_GATE.get(), blockTexture(ModBlocks.ZINC_BLOCK.get()));
+        fenceBlock(ModBlocks.ZINC_FENCE.get(), blockTexture(ModBlocks.ZINC_BLOCK.get()));
+        wallBlock(ModBlocks.ZINC_WALL.get(), blockTexture(ModBlocks.ZINC_BLOCK.get()));
+
+        doorBlockWithRenderType(ModBlocks.ZINC_DOOR.get(), modLoc("block/zinc_door_bottom"), modLoc("block/zinc_door_top"), "cutout");
+        trapdoorBlockWithRenderType(ModBlocks.ZINC_TRAPDOOR.get(), modLoc("block/zinc_trapdoor"), true, "cutout");
+
+        blockItem(ModBlocks.ZINC_STAIRS);
+        blockItem(ModBlocks.ZINC_SLAB);
+        blockItem(ModBlocks.ZINC_PRESSURE_PLATE);
+        blockItem(ModBlocks.ZINC_FENCE_GATE);
+        blockItem(ModBlocks.ZINC_TRAPDOOR, "_bottom");
+
+        customLamp();
+
+        makeCrop(((CropBlock) ModBlocks.CORN_CROP.get()), "corn_crop_stage", "corn_crop_stage");
+        makeBush(((SweetBerryBushBlock) ModBlocks.STRAWBERRY_BUSH.get()), "strawberry_bush_stage", "strawberry_bush_stage");
+        // Add this to your registerStatesAndModels() method
+        makeWildflowerBush();
     }
 
-    private void saplingBlock(DeferredBlock<Block> blockRegistryObject) {
-        simpleBlock(blockRegistryObject.get(),
-                models().cross(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    private void makeWildflowerBush() {
+        Function<BlockState, ConfiguredModel[]> function = state -> wildflowerBushStates(state);
+        getVariantBuilder(ModBlocks.WILDFLOWER_BUSH.get()).forAllStates(function);
     }
 
-    private void leavesBlock(DeferredBlock<Block> blockRegistryObject) {
-        simpleBlockWithItem(blockRegistryObject.get(),
-                models().singleTexture(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), ResourceLocation.parse("minecraft:block/leaves"),
-                        "all", blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    private ConfiguredModel[] wildflowerBushStates(BlockState state) {
+        ConfiguredModel[] models = new ConfiguredModel[1];
+        int age = state.getValue(WildFlowerBushBlock.AGE);
+
+        models[0] = new ConfiguredModel(models().cross("wildflower_bush_stage" + age,
+                ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID,
+                        "block/wildflower_bush_stage" + age)).renderType("cutout"));
+
+        return models;
     }
 
     public void makeBush(SweetBerryBushBlock block, String modelName, String textureName) {
@@ -99,8 +138,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private ConfiguredModel[] states(BlockState state, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().cross(modelName + state.getValue(GojiBerryBushBlock.AGE),
-                ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + textureName + state.getValue(GojiBerryBushBlock.AGE))).renderType("cutout"));
+        models[0] = new ConfiguredModel(models().cross(modelName + state.getValue(StrawberryBushBlock.AGE),
+                ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + textureName + state.getValue(StrawberryBushBlock.AGE))).renderType("cutout"));
 
         return models;
     }
@@ -113,25 +152,63 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private ConfiguredModel[] states(BlockState state, CropBlock block, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().crop(modelName + state.getValue(((RadishCropBlock) block).getAgeProperty()),
-                ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + textureName + state.getValue(((RadishCropBlock) block).getAgeProperty()))).renderType("cutout"));
+
+        // Find the age property from the block state's properties
+        IntegerProperty ageProperty = null;
+        for (Property<?> property : state.getProperties()) {
+            if (property instanceof IntegerProperty && property.getName().equals("age")) {
+                ageProperty = (IntegerProperty) property;
+                break;
+            }
+        }
+
+        // Fallback to standard CropBlock.AGE if no age property found
+        if (ageProperty == null) {
+            ageProperty = CropBlock.AGE;
+        }
+
+        int age = state.getValue(ageProperty);
+
+        models[0] = new ConfiguredModel(models().crop(modelName + age,
+                ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + textureName + age)).renderType("cutout"));
 
         return models;
     }
 
     private void customLamp() {
-        getVariantBuilder(ModBlocks.BISMUTH_LAMP.get()).forAllStates(state -> {
-            if(state.getValue(BismuthLampBlock.CLICKED)) {
-                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("bismuth_lamp_on",
-                        ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + "bismuth_lamp_on")))};
+        getVariantBuilder(ModBlocks.ZINC_LAMP.get()).forAllStates(state -> {
+            if(state.getValue(ZincLampBlock.CLICKED)) {
+                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("zinc_lamp_on",
+                        ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + "zinc_lamp_on")))};
             } else {
-                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("bismuth_lamp_off",
-                        ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + "bismuth_lamp_off")))};
+                return new ConfiguredModel[]{new ConfiguredModel(models().cubeAll("zinc_lamp_off",
+                        ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + "zinc_lamp_off")))};
             }
         });
 
-        simpleBlockItem(ModBlocks.BISMUTH_LAMP.get(), models().cubeAll("bismuth_lamp_on",
-                ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + "bismuth_lamp_on")));
+        simpleBlockItem(ModBlocks.ZINC_LAMP.get(), models().cubeAll("zinc_lamp_on",
+                ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "block/" + "zinc_lamp_on")));
+    }
+
+    // Helper method to get block name
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
+    }
+
+
+    private void saplingBlock(DeferredBlock<Block> blockRegistryObject) {
+        simpleBlock(blockRegistryObject.get(),
+                models().cross(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    }
+
+    private void leavesBlock(DeferredBlock<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(),
+                models().singleTexture(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), ResourceLocation.parse("minecraft:block/leaves"),
+                        "all", blockTexture(blockRegistryObject.get())).renderType("cutout"));
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
@@ -139,10 +216,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void blockItem(DeferredBlock<?> deferredBlock) {
-        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("tutorialmod:block/" + deferredBlock.getId().getPath()));
+        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("enerjolt:block/" + deferredBlock.getId().getPath()));
     }
 
     private void blockItem(DeferredBlock<?> deferredBlock, String appendix) {
-        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("tutorialmod:block/" + deferredBlock.getId().getPath() + appendix));
+        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("enerjolt:block/" + deferredBlock.getId().getPath() + appendix));
     }
 }

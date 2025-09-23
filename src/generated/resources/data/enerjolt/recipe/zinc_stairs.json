@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "zinc",
+  "key": {
+    "#": {
+      "item": "enerjolt:zinc_ingot"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enerjolt:zinc_stairs"
+  }
+}

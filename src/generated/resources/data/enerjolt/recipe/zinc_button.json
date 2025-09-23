@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "zinc",
+  "ingredients": [
+    {
+      "item": "enerjolt:zinc_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "enerjolt:zinc_button"
+  }
+}

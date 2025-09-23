@@ -1,0 +1,8 @@
+{
+  "asset_id": "enerjolt:zinc",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.enerjolt.zinc"
+  },
+  "template_item": "enerjolt:zinc_armor_trim_smithing_template"
+}

@@ -31,6 +31,15 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
                         LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS).build(),
                         LootItemRandomChanceCondition.randomChance(0.25f).build() }, ModItems.RADISH_SEEDS.get()));
 
+        this.add("corn_seeds_to_short_grass",
+                new AddItemModifier(new LootItemCondition[] {
+                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.SHORT_GRASS).build(),
+                        LootItemRandomChanceCondition.randomChance(0.25f).build() }, ModItems.CORN_SEEDS.get()));
+        this.add("corn_seeds_to_tall_grass",
+                new AddItemModifier(new LootItemCondition[] {
+                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.TALL_GRASS).build(),
+                        LootItemRandomChanceCondition.randomChance(0.25f).build() }, ModItems.CORN_SEEDS.get()));
+
         this.add("chisel_from_jungle_temple",
                 new AddItemModifier(new LootItemCondition[] {
                         new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("chests/jungle_temple")).build()
@@ -40,6 +49,11 @@ public class ModGlobalLootModifierProvider extends GlobalLootModifierProvider {
                 new AddItemModifier(new LootItemCondition[] {
                         new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("entities/creeper")).build()
                 }, ModItems.GOJI_BERRIES.get()));
+
+        this.add("strawberry_from_rabbit",
+                new AddItemModifier(new LootItemCondition[] {
+                        new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("entities/rabbit")).build()
+                }, ModItems.STRAWBERRIES.get()));
 
 
     }

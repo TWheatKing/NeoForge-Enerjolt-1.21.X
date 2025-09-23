@@ -60,14 +60,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ModItems.BISMUTH_SHOVEL);
         handheldItem(ModItems.BISMUTH_AXE);
         handheldItem(ModItems.BISMUTH_HOE);
-        handheldItem(ModItems.BISMUTH_HAMMER);
+        //handheldItem(ModItems.BISMUTH_HAMMER);
 
         trimmedArmorItem(ModItems.BISMUTH_HELMET);
         trimmedArmorItem(ModItems.BISMUTH_CHESTPLATE);
         trimmedArmorItem(ModItems.BISMUTH_LEGGINGS);
         trimmedArmorItem(ModItems.BISMUTH_BOOTS);
 
-        basicItem(ModItems.BISMUTH_HORSE_ARMOR.get());
+        //basicItem(ModItems.BISMUTH_HORSE_ARMOR.get());
         basicItem(ModItems.KAUPEN_SMITHING_TEMPLATE.get());
         basicItem(ModItems.BAR_BRAWL_MUSIC_DISC.get());
 
@@ -77,6 +77,72 @@ public class ModItemModelProvider extends ItemModelProvider {
         saplingItem(ModBlocks.BLOODWOOD_SAPLING);
 
         withExistingParent(ModItems.GECKO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+
+        //my stuff
+
+        basicItem(ModItems.RAW_ZINC.get());
+        basicItem(ModItems.ZINC_INGOT.get());
+        basicItem(ModItems.WHEAT_INGOT.get());
+        basicItem(ModItems.RAM.get());
+        //basicItem(ModItems.ADVANCED_CIRCUIT_BOARD.get());
+        //basicItem(ModItems.BASIC_CIRCUIT_BOARD.get());
+        basicItem(ModItems.BASIC_BLADE.get());
+        basicItem(ModItems.ADVANCED_BLADE.get());
+        basicItem(ModItems.IRON_BIT.get());
+        basicItem(ModItems.GOLD_BIT.get());
+        basicItem(ModItems.COPPER_BIT.get());
+        basicItem(ModItems.DIAMOND_BIT.get());
+        basicItem(ModItems.NETHERITE_BIT.get());
+        //basicItem(ModItems.CHISEL.get());
+        basicItem(ModItems.WRENCH.get());
+        //basicItem(ModItems.FUSION_CIRCUIT_BOARD.get());
+        basicItem(ModItems.WISK.get());
+        //basicItem(ModItems.BIO_FUEL_BUCKET.get());
+        basicItem(ModItems.BRASS.get());
+        basicItem(ModItems.GRATE.get());
+        basicItem(ModItems.COPPER_COIL.get());
+        basicItem(ModItems.GOLD_COIL.get());
+        basicItem(ModItems.EMPTY_COIL.get());
+        basicItem(ModItems.COPPER_COIL.get());
+        basicItem(ModItems.DIAMOND_COIL.get());
+        basicItem(ModItems.IRON_PLATE.get());
+        basicItem(ModItems.BRASS_PLATE.get());
+        basicItem(ModItems.GOLD_PLATE.get());
+        basicItem(ModItems.DIAMOND_PLATE.get());
+        basicItem(ModItems.NETHERITE_PLATE.get());
+        basicItem(ModItems.ANDESITE_ALLOY.get());
+        basicItem(ModItems.ZINC_ALLOY.get());
+        basicItem(ModItems.BURGER.get());
+        basicItem(ModItems.CORN.get());
+        basicItem(ModItems.CORN_SEEDS.get());
+        basicItem(ModItems.STRAWBERRIES.get());
+        basicItem(ModItems.COTTON_SWAB.get());
+        basicItem(ModItems.WILDFLOWER.get());
+        basicItem(ModItems.BAR_BRAWL_MUSIC_DISC.get());
+
+        //tools
+        handheldItem(ModItems.ZINC_SWORD);
+        handheldItem(ModItems.ZINC_PICKAXE);
+        handheldItem(ModItems.ZINC_SHOVEL);
+        handheldItem(ModItems.ZINC_AXE);
+        handheldItem(ModItems.ZINC_HOE);
+        handheldItem(ModItems.ZINC_DRILL);
+
+        //armor
+        trimmedArmorItem(ModItems.ZINC_HELMET);
+        trimmedArmorItem(ModItems.ZINC_CHESTPLATE);
+        trimmedArmorItem(ModItems.ZINC_LEGGINGS);
+        trimmedArmorItem(ModItems.ZINC_BOOTS);
+        basicItem(ModItems.ZINC_HORSE_ARMOR.get());
+
+
+        buttonItem(ModBlocks.ZINC_BUTTON, ModBlocks.ZINC_BLOCK);
+        fenceItem(ModBlocks.ZINC_FENCE, ModBlocks.ZINC_BLOCK);
+        wallItem(ModBlocks.ZINC_WALL, ModBlocks.ZINC_BLOCK);
+
+        basicItem(ModBlocks.ZINC_DOOR.asItem());
+        basicItem(ModItems.ZINC_SMITHING_TEMPLATE.get());
     }
 
     private ItemModelBuilder saplingItem(DeferredBlock<Block> item) {

@@ -16,12 +16,13 @@ import net.minecraft.world.item.armortrim.TrimMaterial;
 import java.util.Map;
 
 public class ModTrimMaterials {
-    public static final ResourceKey<TrimMaterial> BISMUTH =
-            ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "bismuth"));
+    public static final ResourceKey<TrimMaterial> ZINC =
+            ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "zinc"));
 
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
-        register(context, BISMUTH, ModItems.BISMUTH.get(), Style.EMPTY.withColor(TextColor.parseColor("#031cfc").getOrThrow()), 0.5F);
+        register(context, ZINC, ModItems.ZINC_INGOT.get(), Style.EMPTY.withColor(TextColor.parseColor("#031cfc").getOrThrow()), 0.5F);
     }
+
 
     private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> trimKey, Item item,
                                  Style style, float itemModelIndex) {

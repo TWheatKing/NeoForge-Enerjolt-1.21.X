@@ -21,6 +21,12 @@ public class ModEffects {
                             ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "slimey"), -0.25f,
                             AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
+    public static final Holder<MobEffect> ATTRACTION_EFFECT = MOB_EFFECTS.register("attraction",
+            () -> new AttractionEffect(MobEffectCategory.NEUTRAL, 0x90EE90)
+                    .addAttributeModifier(Attributes.MOVEMENT_SPEED,
+                            ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "attraction"), -0.25f,
+                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+
 
     public static void register(IEventBus eventBus) {
         MOB_EFFECTS.register(eventBus);

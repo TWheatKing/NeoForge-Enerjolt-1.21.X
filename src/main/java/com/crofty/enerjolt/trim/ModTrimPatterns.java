@@ -13,11 +13,11 @@ import net.minecraft.world.item.armortrim.TrimPattern;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public class ModTrimPatterns {
-    public static final ResourceKey<TrimPattern> KAUPEN = ResourceKey.create(Registries.TRIM_PATTERN,
-            ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "kaupen"));
+    public static final ResourceKey<TrimPattern> ZINC = ResourceKey.create(Registries.TRIM_PATTERN,
+            ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "zinc"));
 
     public static void bootstrap(BootstrapContext<TrimPattern> context) {
-        register(context, ModItems.KAUPEN_SMITHING_TEMPLATE, KAUPEN);
+        register(context, ModItems.ZINC_SMITHING_TEMPLATE, ZINC);
     }
 
     private static void register(BootstrapContext<TrimPattern> context, DeferredItem<Item> item, ResourceKey<TrimPattern> key) {

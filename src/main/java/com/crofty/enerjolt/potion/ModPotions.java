@@ -16,6 +16,9 @@ public class ModPotions {
     public static final Holder<Potion> SLIMEY_POTION = POTIONS.register("slimey_potion",
             () -> new Potion(new MobEffectInstance(ModEffects.SLIMEY_EFFECT, 1200, 0)));
 
+    public static final Holder<Potion> ATTRACTION_POTION = POTIONS.register("attraction_potion",
+            () -> new Potion(new MobEffectInstance(ModEffects.ATTRACTION_EFFECT, 1200, 0)));
+
     public static void register(IEventBus eventBus) {
         POTIONS.register(eventBus);
     }

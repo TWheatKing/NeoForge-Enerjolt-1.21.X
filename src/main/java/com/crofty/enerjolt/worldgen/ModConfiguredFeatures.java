@@ -32,6 +32,11 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_BISMUTH_ORE_KEY = registerKey("nether_bismuth_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> END_BISMUTH_ORE_KEY = registerKey("end_bismuth_ore");
 
+    //CF (how will it look like) -> PF (where do I put it and how many) -> BM (What biome and at what stage?)
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_ZINC_ORE_KEY = registerKey("zinc_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_ZINC_ORE_KEY = registerKey("nether_zinc_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> END_ZINC_ORE_KEY = registerKey("end_zinc_ore");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD_KEY = registerKey("bloodwood");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> GOJI_BERRY_BUSH_KEY = registerKey("goji_berry_bush");
@@ -51,6 +56,12 @@ public class ModConfiguredFeatures {
                 ModBlocks.BISMUTH_NETHER_ORE.get().defaultBlockState(), 9));
         register(context, END_BISMUTH_ORE_KEY, Feature.ORE, new OreConfiguration(endReplaceables,
                 ModBlocks.BISMUTH_END_ORE.get().defaultBlockState(), 9));
+
+        register(context, OVERWORLD_ZINC_ORE_KEY, Feature.ORE, new OreConfiguration(overworldBismuthOres, 9));
+        register(context, NETHER_ZINC_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables,
+                ModBlocks.ZINC_NETHER_ORE.get().defaultBlockState(), 9));
+        register(context, END_ZINC_ORE_KEY, Feature.ORE, new OreConfiguration(endReplaceables,
+                ModBlocks.ZINC_END_ORE.get().defaultBlockState(), 9));
 
 
         register(context, BLOODWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(

@@ -1,7 +1,6 @@
 {
   "item.enerjolt.bismuth": "Bismuth",
   "item.enerjolt.raw_bismuth": "Raw Bismuth",
-  "item.enerjolt.chisel": "Chisel",
 
   "item.enerjolt.radish": "Radish",
   "item.enerjolt.frostfire_ice": "Frostfire Ice",
@@ -100,14 +99,145 @@
 
   "tooltip.enerjolt.magic_block.tooltip": "This Block is very §9MAGICAL§r",
 
-  "tooltip.enerjolt.chisel.shift_down": "This Item can chisel Blocks into Bricks",
-  "tooltip.enerjolt.chisel": "Press §eShift§r for more Information",
-
   "tooltip.enerjolt.radish.tooltip": "Tastes really great!",
 
   "trim_pattern.enerjolt.kaupen": "Kaupen Armor Trim",
   "trim_material.enerjolt.bismuth": "Bismuth Material",
 
   "entity.mccourse.gecko": "Gecko",
-  "entity.mccourse.tomahawk": "Tomahawk"
+  "entity.mccourse.tomahawk": "Tomahawk",
+
+
+  "item.enerjolt.wheat_ingot": "Wheat Ingot",
+  "block.enerjolt.wheat_ingot_block": "Wheat Ingot Block",
+  "item.enerjolt.zinc_ingot": "Zinc",
+  "item.enerjolt.raw_zinc": "Raw Zinc",
+  "item.enerjolt.zinc_alloy": "Zinc Alloy",
+  "item.enerjolt.andesite_alloy": "Andesite Alloy",
+  "item.enerjolt.brass": "Brass",
+
+  "item.enerjolt.iron_bit": "Iron Bit",
+  "item.enerjolt.gold_bit": "Gold Bit",
+  "item.enerjolt.copper_bit": "Copper Bit",
+  "item.enerjolt.diamond_bit": "Diamond Bit",
+  "item.enerjolt.netherite_bit": "Netherite Bit",
+
+  "item.enerjolt.basic_circuit_board": "Tier 1 Circuit Board",
+  "item.enerjolt.advanced_circuit_board": "Tier 2 Circuit Board",
+  "item.enerjolt.fusion_circuit_board": "Tier 3 Circuit Board",
+  "item.enerjolt.basic_blade": "Tier 1 Blade",
+  "item.enerjolt.advanced_blade": "Tier 2 Blade",
+  "item.enerjolt.grate": "Grate",
+
+  "item.enerjolt.iron_plate": "Iron Plate",
+  "item.enerjolt.gold_plate": "Gold Plate",
+  "item.enerjolt.brass_plate": "Brass Plate",
+  "item.enerjolt.diamond_plate": "Diamond Plate",
+  "item.enerjolt.netherite_plate": "Netherite Plate",
+  "item.enerjolt.wisk": "Wisk",
+  "item.enerjolt.ram": "Ram",
+  "item.enerjolt.empty_coil": "Empty Coil",
+  "item.enerjolt.copper_coil": "Copper Coil",
+  "item.enerjolt.gold_coil": "Gold Coil",
+  "item.enerjolt.diamond_coil": "Diamond Coil",
+
+  "item.enerjolt.wrench": "Wrench",
+  "item.enerjolt.chisel": "Chisel",
+  "item.enerjolt.bio_fuel_bucket": "Bio Fuel",
+  "item.enerjolt.burger": "Burger",
+  "item.enerjolt.corn": "Corn",
+  "item.enerjolt.corn_seeds": "Corn Seeds",
+  "item.enerjolt.strawberries": "Strawberries",
+  "item.enerjolt.cotton_swab": "Cotton Swab",
+  "item.enerjolt.wildflower": "Wildflower",
+
+
+  "block.enerjolt.zinc_ore": "Zinc Ore",
+  "block.enerjolt.zinc_deepslate_ore": "Zinc Deepslate Ore",
+  "block.enerjolt.zinc_end_ore": "Zinc End Ore",
+  "block.enerjolt.zinc_nether_ore": "Zinc Nether Ore",
+  "block.enerjolt.zinc_casing": "Zinc Casing",
+  "block.enerjolt.andesite_casing": "Andesite Casing",
+  "block.enerjolt.zinc_casing.tooltip": "A sturdy casing made from zinc alloy",
+  "block.enerjolt.iron_furnace": "Iron Furnace",
+  "block.enerjolt.energy_cable": "Energy Cable",
+  "block.enerjolt.coal_generator": "Coal Generator",
+  "block.enerjolt.energy_battery": "Energy Battery",
+  "block.enerjolt.bio_generator": "Bio Generator",
+  "block.enerjolt.liquifier": "Liquifier",
+  "block.enerjolt.corn_crop": "Corn Crop",
+  "block.enerjolt.strawberry_bush": "Strawberry Bush",
+  "block.enerjolt.wildflower_bush": "Wildflower Bush",
+
+  "block.enerjolt.zinc_block": "Zinc Block",
+  "block.enerjolt.zinc_stairs": "Zinc Stairs",
+  "block.enerjolt.zinc_slab": "Zinc Slab",
+  "block.enerjolt.zinc_pressure_plate": "Zinc Pressure Plate",
+  "block.enerjolt.zinc_button": "Zinc Button",
+  "block.enerjolt.zinc_fence": "Zinc Fence",
+  "block.enerjolt.zinc_fence_gate": "Zinc Fence Gate",
+  "block.enerjolt.zinc_wall": "Zinc Wall",
+  "block.enerjolt.zinc_door": "Zinc Door",
+  "block.enerjolt.zinc_trapdoor": "Zinc Trapdoor",
+  "block.enerjolt.zinc_lamp": "Zinc Lamp",
+
+  "item.enerjolt.zinc_sword": "Zinc Sword",
+  "item.enerjolt.zinc_pickaxe": "Zinc Pickaxe",
+  "item.enerjolt.zinc_shovel": "Zinc Shovel",
+  "item.enerjolt.zinc_axe": "Zinc Axe",
+  "item.enerjolt.zinc_hoe": "Zinc Hoe",
+  "item.enerjolt.zinc_drill": "Zinc Drill",
+  "item.enerjolt.zinc_bow": "Zinc Bow",
+
+
+  "item.enerjolt.zinc_helmet": "Zinc Helmet",
+  "item.enerjolt.zinc_chestplate": "Zinc Chestplate",
+  "item.enerjolt.zinc_leggings": "Zinc Leggings",
+  "item.enerjolt.zinc_boots": "Zinc Boots",
+
+  "item.enerjolt.zinc_horse_armor": "Zinc Horse Armor",
+
+  "item.enerjolt.wheat_smithing_template": "Wheat Smithing Template",
+
+  "effect.enerjolt.attraction": "Animal Attraction",
+  "item.minecraft.potion.effect.attraction_potion": "Animal Attraction Potion",
+  "item.minecraft.splash_potion.effect.attraction_potion": "Animal Attraction Splash Potion",
+  "item.minecraft.lingering_potion.effect.attraction_potion": "Animal Attraction Lingering Potion",
+
+  "painting.enerjolt.ahhhmarried.title": "Ahhh! Married",
+  "painting.enerjolt.ahhhmarried.author": "TheWheatKing",
+  "painting.enerjolt.andrew.title": "Andrew",
+  "painting.enerjolt.andrew.author": "TheWheatKing",
+  "painting.enerjolt.crofty.title": "Crofty Logo",
+  "painting.enerjolt.crofty.author": "TheWheatKing",
+  "painting.enerjolt.engage.title": "Engaged",
+  "painting.enerjolt.engage.author": "TheWheatKing",
+  "painting.enerjolt.family.title": "Family",
+  "painting.enerjolt.family.author": "TheWheatKing",
+  "painting.enerjolt.force.title": "Force",
+  "painting.enerjolt.force.author": "TheWheatKing",
+  "painting.enerjolt.sadie.title": "Sadie",
+  "painting.enerjolt.sadie.author": "TheWheatQueen",
+  "painting.enerjolt.shweet.title": "Shweet Logo",
+  "painting.enerjolt.shweet.author": "Shweet",
+
+  "enchantment.enerjolt.breeding": "Breeding",
+
+  "creativetab.enerjolt.minecraft_farmer_tech": "Minecraft Farmer Tech",
+
+  "tooltip.enerjolt.wrench.line1": "§7Shift + Left-click: Rotate blocks",
+  "tooltip.enerjolt.wrench.line2": "§7Shift + Right-click: Dismantle crafted blocks only",
+  "tooltip.enerjolt.chisel.shift_down": "This Item can chisel Blocks into Bricks",
+  "tooltip.enerjolt.chisel": "Press §eShift§r for more Information",
+
+  "container.enerjolt.iron_furnace": "Iron Furnace",
+  "container.enerjolt.coal_generator": "Coal Generator",
+  "container.enerjolt.bio_generator": "Bio Generator",
+  "death.attack.bio_fuel_drowning": "%1$s died taking in too much green",
+  "death.attack.bio_fuel_drowning.player": "%1$s died taking in too much green whilst trying to escape %2$s",
+  "advancement.enerjolt.green_plunged": "Green Plunged",
+  "advancement.enerjolt.green_plunged.description": "Drown in bio fuel",
+
+  "trim_pattern.enerjolt.zinc": "Zinc Armor Trim",
+  "trim_material.enerjolt.zinc": "Zinc Material"
 }

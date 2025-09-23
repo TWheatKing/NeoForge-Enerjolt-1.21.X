@@ -1,8 +1,10 @@
 {
   "remove": [
+    "#enerjolt:needs_bismuth_tool",
     "#enerjolt:needs_bismuth_tool"
   ],
   "values": [
+    "#minecraft:incorrect_for_iron_tool",
     "#minecraft:incorrect_for_iron_tool"
   ]
 }

@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -17,14 +18,11 @@ import java.util.List;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Enerjolt.MOD_ID);
-
+    //starter examples
     public static final DeferredItem<Item> BISMUTH = ITEMS.register("bismuth",
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> RAW_BISMUTH = ITEMS.register("raw_bismuth",
             () -> new Item(new Item.Properties()));
-
-    public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
-            () -> new ChiselItem(new Item.Properties().durability(32)));
 
     public static final DeferredItem<Item> RADISH = ITEMS.register("radish",
             () -> new Item(new Item.Properties().food(ModFoodProperties.RADISH)) {
@@ -56,9 +54,9 @@ public class ModItems {
             () -> new HoeItem(ModToolTiers.BISMUTH, new Item.Properties()
                     .attributes(HoeItem.createAttributes(ModToolTiers.BISMUTH, 0F, -3.0f))));
 
-    public static final DeferredItem<HammerItem> BISMUTH_HAMMER = ITEMS.register("bismuth_hammer",
-            () -> new HammerItem(ModToolTiers.BISMUTH, new Item.Properties()
-                    .attributes(PickaxeItem.createAttributes(ModToolTiers.BISMUTH, 7F, -3.5f))));
+    //public static final DeferredItem<HammerItem> BISMUTH_HAMMER = ITEMS.register("bismuth_hammer",
+    //        () -> new HammerItem(ModToolTiers.BISMUTH, new Item.Properties()
+    //                .attributes(PickaxeItem.createAttributes(ModToolTiers.BISMUTH, 7F, -3.5f))));
 
     public static final DeferredItem<ArmorItem> BISMUTH_HELMET = ITEMS.register("bismuth_helmet",
             () -> new ModArmorItem(ModArmorMaterials.BISMUTH_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
@@ -73,9 +71,9 @@ public class ModItems {
             () -> new ArmorItem(ModArmorMaterials.BISMUTH_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
                     new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(19))));
 
-    public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = ITEMS.register("bismuth_horse_armor",
-            () -> new AnimalArmorItem(ModArmorMaterials.BISMUTH_ARMOR_MATERIAL, AnimalArmorItem.BodyType.EQUESTRIAN,
-                    false, new Item.Properties().stacksTo(1)));
+    //public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = ITEMS.register("bismuth_horse_armor",
+    //        () -> new AnimalArmorItem(ModArmorMaterials.BISMUTH_ARMOR_MATERIAL, AnimalArmorItem.BodyType.EQUESTRIAN,
+    //                false, new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> KAUPEN_SMITHING_TEMPLATE = ITEMS.register("kaupen_armor_trim_smithing_template",
             () -> SmithingTemplateItem.createArmorTrimTemplate(ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "kaupen")));
@@ -101,6 +99,144 @@ public class ModItems {
 
     public static final DeferredItem<Item> RADIATION_STAFF = ITEMS.register("radiation_staff",
             () -> new Item(new Item.Properties().stacksTo(1)));
+
+    //my items
+    public static final DeferredItem<Item> WHEAT_INGOT = ITEMS.register("wheat_ingot",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> ZINC_INGOT = ITEMS.register("zinc_ingot",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> RAW_ZINC = ITEMS.register("raw_zinc",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BRASS = ITEMS.register("brass",
+            () -> new Item(new Item.Properties()));
+    //Bits
+    public static final DeferredItem<Item> IRON_BIT = ITEMS.register("iron_bit",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GOLD_BIT = ITEMS.register("gold_bit",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> COPPER_BIT = ITEMS.register("copper_bit",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> DIAMOND_BIT = ITEMS.register("diamond_bit",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> NETHERITE_BIT = ITEMS.register("netherite_bit",
+            () -> new Item(new Item.Properties()));
+    //CBS
+    //public static final DeferredItem<Item> BASIC_CIRCUIT_BOARD = ITEMS.register("basic_circuit_board",
+    //        () -> new Item(new Item.Properties()));
+    //public static final DeferredItem<Item> ADVANCED_CIRCUIT_BOARD = ITEMS.register("advanced_circuit_board",
+    //        () -> new Item(new Item.Properties()));
+    //public static final DeferredItem<Item> FUSION_CIRCUIT_BOARD = ITEMS.register("fusion_circuit_board",
+    //        () -> new Item(new Item.Properties()));
+    //fan blades
+    public static final DeferredItem<Item> BASIC_BLADE = ITEMS.register("basic_blade",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> ADVANCED_BLADE = ITEMS.register("advanced_blade",
+            () -> new Item(new Item.Properties()));
+    //machine parts
+    public static final DeferredItem<Item> GRATE = ITEMS.register("grate",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WISK = ITEMS.register("wisk",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> RAM = ITEMS.register("ram",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> EMPTY_COIL = ITEMS.register("empty_coil",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> COPPER_COIL = ITEMS.register("copper_coil",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GOLD_COIL = ITEMS.register("gold_coil",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> DIAMOND_COIL = ITEMS.register("diamond_coil",
+            () -> new Item(new Item.Properties()));
+    //plates
+    public static final DeferredItem<Item> IRON_PLATE = ITEMS.register("iron_plate",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GOLD_PLATE = ITEMS.register("gold_plate",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> BRASS_PLATE = ITEMS.register("brass_plate",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> DIAMOND_PLATE = ITEMS.register("diamond_plate",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> NETHERITE_PLATE = ITEMS.register("netherite_plate",
+            () -> new Item(new Item.Properties()));
+
+    //custom items
+    public static final DeferredItem<Item> WRENCH = ITEMS.register("wrench",
+            () -> new WrenchItem(new Item.Properties()));
+    public static final DeferredItem<Item> CHISEL = ITEMS.register("chisel",
+            () -> new ChiselItem(new Item.Properties().durability(32)));
+    public static final DeferredItem<Item> ZINC_ALLOY = ITEMS.register("zinc_alloy",
+            () -> new ZincAlloyItem(new Item.Properties()));
+    public static final DeferredItem<Item> ANDESITE_ALLOY = ITEMS.register("andesite_alloy",
+            () -> new AndesiteAlloyItem(new Item.Properties()));
+    //public static final DeferredItem<Item> BIO_FUEL_BUCKET = ITEMS.register("bio_fuel_bucket",
+    //        () -> new BucketItem(ModFluids.BIOFUEL.get(), new Item.Properties()
+    //                .craftRemainder(Items.BUCKET)
+    //                .stacksTo(1)));
+    //public static final DeferredHolder<Item, Item> BIO_FUEL = ITEMS.register("bio_fuel",
+    //        () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> BURGER = ITEMS.register("burger",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.BURGER)));
+
+    public static final DeferredItem<SwordItem> ZINC_SWORD = ITEMS.register("zinc_sword",
+            () -> new SwordItem(ModToolTiers.ZINC, new Item.Properties()
+                    .attributes(SwordItem.createAttributes(ModToolTiers.ZINC, 5, -2.4f))));
+    public static final DeferredItem<PickaxeItem> ZINC_PICKAXE = ITEMS.register("zinc_pickaxe",
+            () -> new PickaxeItem(ModToolTiers.ZINC, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.ZINC, 1.0F, -2.8f))));
+    public static final DeferredItem<ShovelItem> ZINC_SHOVEL = ITEMS.register("zinc_shovel",
+            () -> new ShovelItem(ModToolTiers.ZINC, new Item.Properties()
+                    .attributes(ShovelItem.createAttributes(ModToolTiers.ZINC, 1.5F, -3.0f))));
+    public static final DeferredItem<AxeItem> ZINC_AXE = ITEMS.register("zinc_axe",
+            () -> new AxeItem(ModToolTiers.ZINC, new Item.Properties()
+                    .attributes(AxeItem.createAttributes(ModToolTiers.ZINC, 6.0F, -3.2f))));
+    public static final DeferredItem<HoeItem> ZINC_HOE = ITEMS.register("zinc_hoe",
+            () -> new HoeItem(ModToolTiers.ZINC, new Item.Properties()
+                    .attributes(HoeItem.createAttributes(ModToolTiers.ZINC, 0F, -3.0f))));
+
+    public static final DeferredItem<ManualDrillItem> ZINC_DRILL = ITEMS.register("zinc_drill",
+            () -> new ManualDrillItem(ModToolTiers.ZINC, new Item.Properties()
+                    .attributes(PickaxeItem.createAttributes(ModToolTiers.ZINC, 6F, -2.5f))));
+
+    //armor items
+    public static final DeferredItem<ArmorItem> ZINC_HELMET = ITEMS.register("zinc_helmet",
+            () -> new ModArmorItem(ModArmorMaterials.ZINC_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+                    new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(19))));
+    public static final DeferredItem<ArmorItem> ZINC_CHESTPLATE = ITEMS.register("zinc_chestplate",
+            () -> new ArmorItem(ModArmorMaterials.ZINC_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+                    new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(19))));
+    public static final DeferredItem<ArmorItem> ZINC_LEGGINGS = ITEMS.register("zinc_leggings",
+            () -> new ArmorItem(ModArmorMaterials.ZINC_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+                    new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(19))));
+    public static final DeferredItem<ArmorItem> ZINC_BOOTS = ITEMS.register("zinc_boots",
+            () -> new ArmorItem(ModArmorMaterials.ZINC_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+                    new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(19))));
+
+    public static final DeferredItem<Item> ZINC_HORSE_ARMOR = ITEMS.register("zinc_horse_armor",
+            () -> new AnimalArmorItem(ModArmorMaterials.ZINC_ARMOR_MATERIAL, AnimalArmorItem.BodyType.EQUESTRIAN,
+                    false, new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> ZINC_SMITHING_TEMPLATE = ITEMS.register("zinc_armor_trim_smithing_template",
+            () -> SmithingTemplateItem.createArmorTrimTemplate(ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "zinc")));
+
+    public static final DeferredItem<Item> ZINC_BOW = ITEMS.register("zinc_bow",
+            () -> new BowItem(new Item.Properties().durability(500)));
+
+    public static final DeferredItem<Item> CORN = ITEMS.register("corn",
+            () -> new CornItem(new Item.Properties().food(ModFoodProperties.CORN)));
+
+    public static final DeferredItem<Item> CORN_SEEDS = ITEMS.register("corn_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.CORN_CROP.get(), new Item.Properties()));
+
+    public static final DeferredItem<Item> STRAWBERRIES = ITEMS.register("strawberries",
+            () -> new ItemNameBlockItem(ModBlocks.STRAWBERRY_BUSH.get(), new Item.Properties().food(ModFoodProperties.STRAWBERRY)));
+
+    public static final DeferredItem<Item> COTTON_SWAB = ITEMS.register("cotton_swab",
+            () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> WILDFLOWER = ITEMS.register("wildflower",
+            () -> new ItemNameBlockItem(ModBlocks.WILDFLOWER_BUSH.get(), new Item.Properties()));
+
 
 
     public static void register(IEventBus eventBus) {

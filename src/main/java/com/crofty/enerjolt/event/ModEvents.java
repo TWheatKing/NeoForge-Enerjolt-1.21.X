@@ -1,5 +1,6 @@
 package com.crofty.enerjolt.event;
 
+import com.crofty.enerjolt.item.custom.ManualDrillItem;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import com.crofty.enerjolt.Enerjolt;
 import com.crofty.enerjolt.item.ModItems;
@@ -38,20 +39,20 @@ public class ModEvents {
     private static final Set<BlockPos> HARVESTED_BLOCKS = new HashSet<>();
 
     // Done with the help of https://github.com/CoFH/CoFHCore/blob/1.19.x/src/main/java/cofh/core/event/AreaEffectEvents.java
-    // Don't be a jerk License
+// Don't be a jerk License
     @SubscribeEvent
-    public static void onHammerUsage(BlockEvent.BreakEvent event) {
+    public static void onDrillUsage(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
         ItemStack mainHandItem = player.getMainHandItem();
 
-        if(mainHandItem.getItem() instanceof HammerItem hammer && player instanceof ServerPlayer serverPlayer) {
+        if(mainHandItem.getItem() instanceof ManualDrillItem drill && player instanceof ServerPlayer serverPlayer) {
             BlockPos initialBlockPos = event.getPos();
             if(HARVESTED_BLOCKS.contains(initialBlockPos)) {
                 return;
             }
 
-            for(BlockPos pos : HammerItem.getBlocksToBeDestroyed(1, initialBlockPos, serverPlayer)) {
-                if(pos == initialBlockPos || !hammer.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
+            for(BlockPos pos : ManualDrillItem.getBlocksToBeDestroyed(1, initialBlockPos, serverPlayer)) {
+                if(pos == initialBlockPos || !drill.isCorrectToolForDrops(mainHandItem, event.getLevel().getBlockState(pos))) {
                     continue;
                 }
 
@@ -78,6 +79,7 @@ public class ModEvents {
         PotionBrewing.Builder builder = event.getBuilder();
 
         builder.addMix(Potions.AWKWARD, Items.SLIME_BALL, ModPotions.SLIMEY_POTION);
+        builder.addMix(Potions.AWKWARD, Items.WHEAT, ModPotions.ATTRACTION_POTION);
     }
 
     @SubscribeEvent

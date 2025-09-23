@@ -1,12 +1,8 @@
 package com.crofty.enerjolt.item.custom;
 
-import com.crofty.enerjolt.block.ModBlocks;
 import com.crofty.enerjolt.component.ModDataComponents;
-import com.crofty.enerjolt.particle.ModParticles;
 import com.crofty.enerjolt.sound.ModSounds;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -23,15 +19,18 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.List;
 import java.util.Map;
 
-public class ChiselItem extends Item {
+public class ChiselItem  extends Item {
     private static final Map<Block, Block> CHISEL_MAP =
             Map.of(
                     Blocks.STONE, Blocks.STONE_BRICKS,
-                    Blocks.END_STONE, Blocks.END_STONE_BRICKS,
+                    Blocks.STONE_BRICKS, Blocks.CHISELED_STONE_BRICKS,
+                    Blocks.CHISELED_STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS,
+                    Blocks.CRACKED_STONE_BRICKS, Blocks.STONE,
                     Blocks.DEEPSLATE, Blocks.DEEPSLATE_BRICKS,
-                    Blocks.GOLD_BLOCK, Blocks.IRON_BLOCK,
-                    Blocks.IRON_BLOCK, Blocks.STONE,
-                    Blocks.NETHERRACK, ModBlocks.BISMUTH_BLOCK.get()
+                    Blocks.DEEPSLATE_BRICKS, Blocks.DEEPSLATE_TILES,
+                    Blocks.DEEPSLATE_TILES, Blocks.COBBLED_DEEPSLATE,
+                    Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE
+
             );
 
     public ChiselItem(Properties properties) {
@@ -52,31 +51,18 @@ public class ChiselItem extends Item {
 
                 level.playSound(null, context.getClickedPos(), ModSounds.CHISEL_USE.get(), SoundSource.BLOCKS);
 
-                ((ServerLevel) level).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, clickedBlock.defaultBlockState()),
-                        context.getClickedPos().getX() + 0.5, context.getClickedPos().getY() + 1.0,
-                        context.getClickedPos().getZ() + 0.5, 5, 0, 0, 0, 1);
-
-                ((ServerLevel) level).sendParticles(ParticleTypes.DOLPHIN,
-                        context.getClickedPos().getX() + 0.5, context.getClickedPos().getY() + 1.5,
-                        context.getClickedPos().getZ() + 0.5, 5, 0, 0, 0, 3);
-
-                ((ServerLevel) level).sendParticles(ModParticles.BISMUTH_PARTICLES.get(),
-                        context.getClickedPos().getX() + 0.5, context.getClickedPos().getY() + 1.0,
-                        context.getClickedPos().getZ() + 0.5, 5, 0, 0, 0, 3);
-
                 context.getItemInHand().set(ModDataComponents.COORDINATES, context.getClickedPos());
             }
         }
 
         return InteractionResult.SUCCESS;
     }
-
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if(Screen.hasShiftDown()) {
-            tooltipComponents.add(Component.translatable("tooltip.tutorialmod.chisel.shift_down"));
+            tooltipComponents.add(Component.translatable("tooltip.minecraftfarmertechmod.chisel.shift_down"));
         } else {
-            tooltipComponents.add(Component.translatable("tooltip.tutorialmod.chisel"));
+            tooltipComponents.add(Component.translatable("tooltip.minecraftfarmertechmod.chisel"));
         }
 
         if(stack.get(ModDataComponents.COORDINATES) != null) {

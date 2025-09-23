@@ -18,9 +18,9 @@ import java.util.Map;
 public class ModArmorItem extends ArmorItem {
     private static final Map<Holder<ArmorMaterial>, List<MobEffectInstance>> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<Holder<ArmorMaterial>, List<MobEffectInstance>>())
-                    .put(ModArmorMaterials.BISMUTH_ARMOR_MATERIAL,
-                            List.of(new MobEffectInstance(MobEffects.JUMP, 200, 1, false, false),
-                            new MobEffectInstance(MobEffects.GLOWING, 200, 1, false, false)))
+                    .put(ModArmorMaterials.ZINC_ARMOR_MATERIAL,
+                            List.of(new MobEffectInstance(MobEffects.DIG_SPEED, 200, 1, false, false),
+                                    new MobEffectInstance(MobEffects.GLOWING, 200, 1, false, false)))
                     .build();
 
     public ModArmorItem(Holder<ArmorMaterial> material, Type type, Properties properties) {

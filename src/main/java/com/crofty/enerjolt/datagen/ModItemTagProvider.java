@@ -26,6 +26,8 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ModTags.Items.TRANSFORMABLE_ITEMS)
                 .add(ModItems.BISMUTH.get())
                 .add(ModItems.RAW_BISMUTH.get())
+                .add(ModItems.ZINC_INGOT.get())
+                .add(ModItems.RAW_ZINC.get())
                 .add(Items.COAL)
                 .add(Items.STICK)
                 .add(Items.COMPASS);
@@ -61,5 +63,29 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         this.tag(ItemTags.PLANKS)
                 .add(ModBlocks.BLOODWOOD_PLANKS.asItem());
+
+        tag(ItemTags.SWORDS)
+                .add(ModItems.ZINC_SWORD.get());
+        tag(ItemTags.PICKAXES)
+                .add(ModItems.ZINC_PICKAXE.get());
+        tag(ItemTags.SHOVELS)
+                .add(ModItems.ZINC_SHOVEL.get());
+        tag(ItemTags.AXES)
+                .add(ModItems.ZINC_AXE.get());
+        tag(ItemTags.HOES)
+                .add(ModItems.ZINC_HOE.get());
+
+        this.tag(ItemTags.TRIMMABLE_ARMOR)
+                .add(ModItems.ZINC_HELMET.get())
+                .add(ModItems.ZINC_CHESTPLATE.get())
+                .add(ModItems.ZINC_LEGGINGS.get())
+                .add(ModItems.ZINC_BOOTS.get());
+
+        this.tag(ItemTags.TRIM_MATERIALS)
+                .add(ModItems.ZINC_INGOT.get());
+
+        this.tag(ItemTags.TRIM_TEMPLATES)
+                .add(ModItems.ZINC_SMITHING_TEMPLATE.get());
+
     }
 }
