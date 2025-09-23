@@ -3,7 +3,6 @@ package com.crofty.enerjolt.block.custom.energy;
 import com.crofty.enerjolt.energy.EnergyCapabilityProvider;
 import com.crofty.enerjolt.energy.EnergyTier;
 import com.crofty.enerjolt.energy.EnerjoltEnergyStorage;
-import com.crofty.enerjolt.recipe.ModRecipes;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +20,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.Level;
@@ -572,48 +570,6 @@ class ElectricSmelterBlockEntity extends BlockEntity implements MenuProvider,
     }
 }
 
-/**
- * Quantum Processor - Ultra-advanced energy machine for complex recipes
- */
-public class QuantumProcessorBlock extends BaseEntityBlock {
-    public static final MapCodec<QuantumProcessorBlock> CODEC = simpleCodec(QuantumProcessorBlock::new);
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-    public static final BooleanProperty QUANTUM_STATE = BooleanProperty.create("quantum_state");
-
-    public QuantumProcessorBlock(Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.defaultBlockState()
-                .setValue(ACTIVE, false)
-                .setValue(QUANTUM_STATE, false));
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(ACTIVE, QUANTUM_STATE);
-    }
-
-    @Override
-    protected RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new QuantumProcessorBlockEntity(pos, state);
-    }
-
-    // Quantum processor only works with ULTIMATE or CREATIVE tier energy
-    // Processes unique recipes at incredible speeds
-    // Can transmute materials and create exotic matter
-    // Requires quantum stabilization to prevent reality tears
-}
-
 class QuantumProcessorBlockEntity extends BlockEntity implements EnergyCapabilityProvider.IEnergyHandler {
     private final EnerjoltEnergyStorage energyStorage;
     private final ItemStackHandler itemHandler;
@@ -706,27 +662,3 @@ class QuantumProcessorBlockEntity extends BlockEntity implements EnergyCapabilit
     }
 }
 
-/**
- * Matter Fabricator - Converts energy directly into matter
- */
-public class MatterFabricatorBlock extends BaseEntityBlock {
-    // Creates items from pure energy
-    // Extremely energy-intensive
-    // Can duplicate rare materials
-    // Requires exotic matter as catalyst
-
-    // Implementation similar to other machines but focused on
-    // energy-to-matter conversion rather than item processing
-}
-
-/**
- * Energy Disruptor - Defensive energy weapon
- */
-public class EnergyDisruptorBlock extends BaseEntityBlock {
-    // Shoots energy beams at hostile mobs
-    // Drains energy from nearby machines to power itself
-    // Creates energy shields
-    // Can overload enemy equipment
-
-    // Combines energy system with combat mechanics
-}
