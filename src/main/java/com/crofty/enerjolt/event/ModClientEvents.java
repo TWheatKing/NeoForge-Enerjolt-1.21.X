@@ -12,7 +12,7 @@ public class ModClientEvents {
 
     @SubscribeEvent
     public static void onComputeFovModifierEvent(ComputeFovModifierEvent event) {
-        if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == ModItems.KAUPEN_BOW.get()) {
+        if(event.getPlayer().isUsingItem() && event.getPlayer().getUseItem().getItem() == ModItems.ZINC_BOW.get()) {
             float fovModifier = 1f;
             int ticksUsingItem = event.getPlayer().getTicksUsingItem();
             float deltaTicks = (float)ticksUsingItem / 20f;

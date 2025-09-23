@@ -16,7 +16,7 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "block": "enerjolt:radish_crop",
+                  "block": "enerjolt:corn_crop",
                   "condition": "minecraft:block_state_property",
                   "properties": {
                     "age": "7"
@@ -38,7 +38,7 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "block": "enerjolt:radish_crop",
+          "block": "enerjolt:corn_crop",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "7"

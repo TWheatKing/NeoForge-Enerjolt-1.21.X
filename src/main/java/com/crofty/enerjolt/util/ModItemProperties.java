@@ -12,7 +12,6 @@ public class ModItemProperties {
         ItemProperties.register(ModItems.CHISEL.get(), ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "used"),
                 (stack, level, entity, seed) -> stack.get(ModDataComponents.COORDINATES) != null ? 1f : 0f);
 
-        makeCustomBow(ModItems.KAUPEN_BOW.get());
         makeCustomBow(ModItems.ZINC_BOW.get());
     }
 

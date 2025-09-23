@@ -1,11 +1,8 @@
 {
   "entries": [
     "enerjolt:corn_seeds_to_short_grass",
-    "enerjolt:berry_from_creeper",
-    "enerjolt:radish_seeds_to_short_grass",
     "enerjolt:corn_seeds_to_tall_grass",
     "enerjolt:strawberry_from_rabbit",
-    "enerjolt:radish_seeds_to_tall_grass",
     "enerjolt:chisel_from_jungle_temple"
   ],
   "replace": false

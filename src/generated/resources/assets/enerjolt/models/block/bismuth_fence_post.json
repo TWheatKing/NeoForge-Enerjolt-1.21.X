@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/fence_post",
-  "textures": {
-    "texture": "enerjolt:block/bismuth_block"
-  }
-}

@@ -41,38 +41,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        basicItem(ModItems.BISMUTH.get());
-        basicItem(ModItems.RAW_BISMUTH.get());
 
-        basicItem(ModItems.RADISH.get());
-        basicItem(ModItems.STARLIGHT_ASHES.get());
-        basicItem(ModItems.FROSTFIRE_ICE.get());
-        // basicItem(ModItems.CHISEL.get());
-
-        buttonItem(ModBlocks.BISMUTH_BUTTON, ModBlocks.BISMUTH_BLOCK);
-        fenceItem(ModBlocks.BISMUTH_FENCE, ModBlocks.BISMUTH_BLOCK);
-        wallItem(ModBlocks.BISMUTH_WALL, ModBlocks.BISMUTH_BLOCK);
-
-        basicItem(ModBlocks.BISMUTH_DOOR.asItem());
-
-        handheldItem(ModItems.BISMUTH_SWORD);
-        handheldItem(ModItems.BISMUTH_PICKAXE);
-        handheldItem(ModItems.BISMUTH_SHOVEL);
-        handheldItem(ModItems.BISMUTH_AXE);
-        handheldItem(ModItems.BISMUTH_HOE);
-        //handheldItem(ModItems.BISMUTH_HAMMER);
-
-        trimmedArmorItem(ModItems.BISMUTH_HELMET);
-        trimmedArmorItem(ModItems.BISMUTH_CHESTPLATE);
-        trimmedArmorItem(ModItems.BISMUTH_LEGGINGS);
-        trimmedArmorItem(ModItems.BISMUTH_BOOTS);
-
-        //basicItem(ModItems.BISMUTH_HORSE_ARMOR.get());
-        basicItem(ModItems.KAUPEN_SMITHING_TEMPLATE.get());
         basicItem(ModItems.BAR_BRAWL_MUSIC_DISC.get());
-
-        basicItem(ModItems.RADISH_SEEDS.get());
-        basicItem(ModItems.GOJI_BERRIES.get());
 
         saplingItem(ModBlocks.BLOODWOOD_SAPLING);
 

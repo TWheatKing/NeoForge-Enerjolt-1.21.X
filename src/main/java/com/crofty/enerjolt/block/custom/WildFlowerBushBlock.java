@@ -166,7 +166,7 @@ public class WildFlowerBushBlock extends BushBlock implements BonemealableBlock 
         level.setBlock(pos, newState, 2);
 
         // Debug message
-        System.out.println("[DEBUG] Bonemealed bush from age " + currentAge + " to " + newAge);
+        //System.out.println("[DEBUG] Bonemealed bush from age " + currentAge + " to " + newAge);
 
         // IMPROVED: Check for wildflower drop whenever reaching full maturity via bonemeal
         if (newAge == MAX_AGE) {

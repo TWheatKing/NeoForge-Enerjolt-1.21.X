@@ -48,7 +48,7 @@ public class GeckoEntity extends Animal {
 
         this.goalSelector.addGoal(1, new PanicGoal(this, 2.0));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, stack -> stack.is(ModItems.GOJI_BERRIES), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, stack -> stack.is(ModItems.STRAWBERRIES), false));
 
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25));
 
@@ -66,7 +66,7 @@ public class GeckoEntity extends Animal {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(ModItems.GOJI_BERRIES.get());
+        return stack.is(ModItems.STRAWBERRIES.get());
     }
 
     @Nullable

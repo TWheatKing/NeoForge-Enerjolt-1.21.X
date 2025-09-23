@@ -17,7 +17,4 @@ public class ModFoodProperties {
     public static final FoodProperties STRAWBERRY = new FoodProperties.Builder().nutrition(2)
             .saturationModifier(0.15f).fast().build();
 
-    public static final FoodProperties GOJI_BERRY = new FoodProperties.Builder().nutrition(2)
-            .saturationModifier(0.15f).fast().build();
-
 }

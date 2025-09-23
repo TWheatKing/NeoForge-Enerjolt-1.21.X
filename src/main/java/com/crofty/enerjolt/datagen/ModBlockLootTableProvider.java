@@ -2,7 +2,6 @@ package com.crofty.enerjolt.datagen;
 
 import com.crofty.enerjolt.block.ModBlocks;
 import com.crofty.enerjolt.block.custom.CornCropBlock;
-import com.crofty.enerjolt.block.custom.RadishCropBlock;
 import com.crofty.enerjolt.block.custom.WildFlowerBushBlock;
 import com.crofty.enerjolt.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -34,60 +33,13 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(ModBlocks.BISMUTH_BLOCK.get());
-        // dropSelf(ModBlocks.MAGIC_BLOCK.get());
 
-        add(ModBlocks.BISMUTH_ORE.get(),
-                block -> createOreDrop(ModBlocks.BISMUTH_ORE.get(), ModItems.RAW_BISMUTH.get()));
-        add(ModBlocks.BISMUTH_DEEPSLATE_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.BISMUTH_DEEPSLATE_ORE.get(), ModItems.RAW_BISMUTH.get(), 2, 5));
-
-        add(ModBlocks.BISMUTH_END_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.BISMUTH_END_ORE.get(), ModItems.RAW_BISMUTH.get(), 3, 6));
-        add(ModBlocks.BISMUTH_NETHER_ORE.get(),
-                block -> createMultipleOreDrops(ModBlocks.BISMUTH_NETHER_ORE.get(), ModItems.RAW_BISMUTH.get(), 4, 8));
-
-        dropSelf(ModBlocks.BISMUTH_STAIRS.get());
-        add(ModBlocks.BISMUTH_SLAB.get(),
-                block -> createSlabItemTable(ModBlocks.BISMUTH_SLAB.get()));
-
-        dropSelf(ModBlocks.BISMUTH_PRESSURE_PLATE.get());
-        dropSelf(ModBlocks.BISMUTH_BUTTON.get());
-
-        dropSelf(ModBlocks.BISMUTH_FENCE.get());
-        dropSelf(ModBlocks.BISMUTH_FENCE_GATE.get());
-        dropSelf(ModBlocks.BISMUTH_WALL.get());
-        dropSelf(ModBlocks.BISMUTH_TRAPDOOR.get());
-
-        add(ModBlocks.BISMUTH_DOOR.get(),
-                block -> createDoorTable(ModBlocks.BISMUTH_DOOR.get()));
-
-        dropSelf(ModBlocks.BISMUTH_LAMP.get());
-
-        LootItemCondition.Builder lootItemConditionBuilder = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.RADISH_CROP.get())
-                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RadishCropBlock.AGE, 3))
+        LootItemCondition.Builder lootItemConditionBuilder = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.CORN_CROP.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CornCropBlock.AGE, 7));
-
-        this.add(ModBlocks.RADISH_CROP.get(), this.createCropDrops(ModBlocks.RADISH_CROP.get(),
-                ModItems.RADISH.get(), ModItems.RADISH_SEEDS.get(), lootItemConditionBuilder));
 
 
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 
-        this.add(ModBlocks.GOJI_BERRY_BUSH.get(), block -> this.applyExplosionDecay(
-                block,LootTable.lootTable().withPool(LootPool.lootPool().when(
-                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.GOJI_BERRY_BUSH.get())
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SweetBerryBushBlock.AGE, 3))
-                                ).add(LootItem.lootTableItem(ModItems.GOJI_BERRIES.get()))
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F)))
-                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
-                ).withPool(LootPool.lootPool().when(
-                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.GOJI_BERRY_BUSH.get())
-                                                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SweetBerryBushBlock.AGE, 2))
-                                ).add(LootItem.lootTableItem(ModItems.GOJI_BERRIES.get()))
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE)))
-                )));
 
         this.dropSelf(ModBlocks.BLOODWOOD_LOG.get());
         this.dropSelf(ModBlocks.BLOODWOOD_WOOD.get());

@@ -89,7 +89,7 @@ public class ModEvents {
 
             trades.get(1).add((entity, randomSource) -> new MerchantOffer(
                     new ItemCost(Items.EMERALD, 3),
-                    new ItemStack(ModItems.GOJI_BERRIES.get(), 18), 6, 3, 0.05f));
+                    new ItemStack(ModItems.STRAWBERRIES.get(), 18), 6, 3, 0.05f));
 
             trades.get(1).add((entity, randomSource) -> new MerchantOffer(
                     new ItemCost(Items.DIAMOND, 12),
@@ -97,7 +97,7 @@ public class ModEvents {
 
             trades.get(2).add((entity, randomSource) -> new MerchantOffer(
                     new ItemCost(Items.ENDER_PEARL, 1),
-                    new ItemStack(ModItems.RADISH_SEEDS.get(), 1), 2, 8, 0.05f));
+                    new ItemStack(ModItems.CORN_SEEDS.get(), 1), 2, 8, 0.05f));
         }
 
         if(event.getType() == ModVillagers.KAUPENGER.value()) {
@@ -105,7 +105,7 @@ public class ModEvents {
 
             trades.get(1).add((entity, randomSource) -> new MerchantOffer(
                     new ItemCost(Items.EMERALD, 2),
-                    new ItemStack(ModItems.RAW_BISMUTH.get(), 18), 6, 3, 0.05f));
+                    new ItemStack(ModItems.RAW_ZINC.get(), 18), 6, 3, 0.05f));
 
             trades.get(1).add((entity, randomSource) -> new MerchantOffer(
                     new ItemCost(Items.DIAMOND, 16),
@@ -113,7 +113,7 @@ public class ModEvents {
 
             trades.get(2).add((entity, randomSource) -> new MerchantOffer(
                     new ItemCost(Items.ENDER_PEARL, 2),
-                    new ItemStack(ModItems.BISMUTH_SWORD.get(), 1), 2, 8, 0.05f));
+                    new ItemStack(ModItems.ZINC_SWORD.get(), 1), 2, 8, 0.05f));
         }
     }
 
@@ -121,10 +121,6 @@ public class ModEvents {
     public static void addWanderingTrades(WandererTradesEvent event) {
         List<VillagerTrades.ItemListing> genericTrades = event.getGenericTrades();
         List<VillagerTrades.ItemListing> rareTrades = event.getRareTrades();
-
-        genericTrades.add((entity, randomSource) -> new MerchantOffer(
-                new ItemCost(Items.EMERALD, 16),
-                new ItemStack(ModItems.KAUPEN_SMITHING_TEMPLATE.get(), 1), 1, 10, 0.2f));
 
         rareTrades.add((entity, randomSource) -> new MerchantOffer(
                 new ItemCost(Items.NETHERITE_INGOT, 1),

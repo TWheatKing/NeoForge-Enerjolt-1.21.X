@@ -1,10 +1,9 @@
-// 1.21.1	2025-09-23T01:49:04.156986	Tags for minecraft:block mod id enerjolt
+// 1.21.1	2025-09-23T20:27:37.2829795	Tags for minecraft:block mod id enerjolt
 bc1cc4efb841336a9cc2ff3a4c44f12105e02637 data/enerjolt/tags/block/incorrect_for_bismuth_tool.json
-c7dbc1225e1ae74a6dbed28beda621f57d64ea9f data/enerjolt/tags/block/needs_bismuth_tool.json
-cebf3ef24c76a4ebc96cf8e6eccf27844c5de612 data/minecraft/tags/block/fences.json
-61aafe5ba8562794921352039c93b137bb1a4604 data/minecraft/tags/block/fence_gates.json
+888a9524555b72882af23e661e7a1e99297bfe03 data/enerjolt/tags/block/needs_bismuth_tool.json
+15b65e06e9ffd822d5575a995c336fb0e2e428cc data/minecraft/tags/block/fences.json
+76de3c91700a786cac0f9bc4d38ff3c6439e4247 data/minecraft/tags/block/fence_gates.json
 5e58d0093dc4486b0a2a5538afb4e6632bb7a0aa data/minecraft/tags/block/logs_that_burn.json
-bfc519f637bc89ba12b8f83052a730b908ec1bd3 data/minecraft/tags/block/mineable/pickaxe.json
-ac871def7809c732aa0f4438ed0146181d17dc5e data/minecraft/tags/block/needs_diamond_tool.json
-7ff81f87d446bf4f1c57b516ef4f9b27da56b6df data/minecraft/tags/block/needs_iron_tool.json
-70dfe707e9e25a897d8f3f2dd674d1e57e8de441 data/minecraft/tags/block/walls.json
+23d1751daef3945a4a4240c047ad072b12b415c9 data/minecraft/tags/block/mineable/pickaxe.json
+dba1bc0d6884b4a72ba595f832e2891ebb214e22 data/minecraft/tags/block/needs_iron_tool.json
+34fd072195e95053015e3a0950812fe640a3c1cb data/minecraft/tags/block/walls.json

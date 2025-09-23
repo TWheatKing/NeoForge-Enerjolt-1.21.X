@@ -28,37 +28,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithItem(ModBlocks.BISMUTH_BLOCK);
-
-        blockWithItem(ModBlocks.BISMUTH_ORE);
-        blockWithItem(ModBlocks.BISMUTH_DEEPSLATE_ORE);
-
-        blockWithItem(ModBlocks.MAGIC_BLOCK);
-
-        stairsBlock(ModBlocks.BISMUTH_STAIRS.get(), blockTexture(ModBlocks.BISMUTH_BLOCK.get()));
-        slabBlock(ModBlocks.BISMUTH_SLAB.get(), blockTexture(ModBlocks.BISMUTH_BLOCK.get()), blockTexture(ModBlocks.BISMUTH_BLOCK.get()));
-
-        buttonBlock(ModBlocks.BISMUTH_BUTTON.get(), blockTexture(ModBlocks.BISMUTH_BLOCK.get()));
-        pressurePlateBlock(ModBlocks.BISMUTH_PRESSURE_PLATE.get(), blockTexture(ModBlocks.BISMUTH_BLOCK.get()));
-
-        fenceBlock(ModBlocks.BISMUTH_FENCE.get(), blockTexture(ModBlocks.BISMUTH_BLOCK.get()));
-        fenceGateBlock(ModBlocks.BISMUTH_FENCE_GATE.get(), blockTexture(ModBlocks.BISMUTH_BLOCK.get()));
-        wallBlock(ModBlocks.BISMUTH_WALL.get(), blockTexture(ModBlocks.BISMUTH_BLOCK.get()));
-
-        doorBlockWithRenderType(ModBlocks.BISMUTH_DOOR.get(), modLoc("block/bismuth_door_bottom"), modLoc("block/bismuth_door_top"), "cutout");
-        trapdoorBlockWithRenderType(ModBlocks.BISMUTH_TRAPDOOR.get(), modLoc("block/bismuth_trapdoor"), true, "cutout");
-
-        blockItem(ModBlocks.BISMUTH_STAIRS);
-        blockItem(ModBlocks.BISMUTH_SLAB);
-        blockItem(ModBlocks.BISMUTH_PRESSURE_PLATE);
-        blockItem(ModBlocks.BISMUTH_FENCE_GATE);
-        blockItem(ModBlocks.BISMUTH_TRAPDOOR, "_bottom");
-
-        makeCrop(((CropBlock) ModBlocks.RADISH_CROP.get()), "radish_crop_stage", "radish_crop_stage");
-        makeBush(((SweetBerryBushBlock) ModBlocks.GOJI_BERRY_BUSH.get()), "goji_berry_bush_stage", "goji_berry_bush_stage");
-
-        blockWithItem(ModBlocks.BISMUTH_END_ORE);
-        blockWithItem(ModBlocks.BISMUTH_NETHER_ORE);
 
         logBlock(((RotatedPillarBlock) ModBlocks.BLOODWOOD_LOG.get()));
         axisBlock(((RotatedPillarBlock) ModBlocks.BLOODWOOD_WOOD.get()), blockTexture(ModBlocks.BLOODWOOD_LOG.get()), blockTexture(ModBlocks.BLOODWOOD_LOG.get()));
