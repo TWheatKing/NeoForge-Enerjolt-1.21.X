@@ -239,5 +239,71 @@
   "advancement.enerjolt.green_plunged.description": "Drown in bio fuel",
 
   "trim_pattern.enerjolt.zinc": "Zinc Armor Trim",
-  "trim_material.enerjolt.zinc": "Zinc Material"
+  "trim_material.enerjolt.zinc": "Zinc Material",
+
+  "creativetab.enerjolt.energy": "Enerjolt Energy",
+
+  "block.enerjolt.lv_generator": "LV Generator",
+  "block.enerjolt.mv_generator": "MV Generator",
+  "block.enerjolt.hv_generator": "HV Generator",
+  "block.enerjolt.ev_generator": "EV Generator",
+  "block.enerjolt.iv_generator": "IV Generator",
+  "block.enerjolt.luv_generator": "LuV Generator",
+  "block.enerjolt.zv_generator": "ZV Generator",
+  "block.enerjolt.uv_generator": "UV Generator",
+  "block.enerjolt.creative_generator": "Creative Generator",
+
+  "block.enerjolt.lv_energy_storage": "LV Energy Storage",
+  "block.enerjolt.mv_energy_storage": "MV Energy Storage",
+  "block.enerjolt.hv_energy_storage": "HV Energy Storage",
+  "block.enerjolt.ev_energy_storage": "EV Energy Storage",
+  "block.enerjolt.iv_energy_storage": "IV Energy Storage",
+  "block.enerjolt.luv_energy_storage": "LuV Energy Storage",
+  "block.enerjolt.zv_energy_storage": "ZV Energy Storage",
+  "block.enerjolt.uv_energy_storage": "UV Energy Storage",
+  "block.enerjolt.creative_energy_storage": "Creative Energy Storage",
+
+  "block.enerjolt.lv_cable": "LV Cable",
+  "block.enerjolt.mv_cable": "MV Cable",
+  "block.enerjolt.hv_cable": "HV Cable",
+  "block.enerjolt.ev_cable": "EV Cable",
+  "block.enerjolt.iv_cable": "IV Cable",
+  "block.enerjolt.luv_cable": "LuV Cable",
+  "block.enerjolt.zv_cable": "ZV Cable",
+  "block.enerjolt.uv_cable": "UV Cable",
+  "block.enerjolt.creative_cable": "Creative Cable",
+
+  "item.enerjolt.lv_drill": "LV Drill",
+  "item.enerjolt.mv_drill": "MV Drill",
+  "item.enerjolt.hv_drill": "HV Drill",
+  "item.enerjolt.ev_drill": "EV Drill",
+  "item.enerjolt.iv_drill": "IV Drill",
+  "item.enerjolt.luv_drill": "LuV Drill",
+  "item.enerjolt.zv_drill": "ZV Drill",
+  "item.enerjolt.uv_drill": "UV Drill",
+  "item.enerjolt.creative_drill": "Creative Drill",
+
+  "item.enerjolt.lv_battery": "LV Battery",
+  "item.enerjolt.mv_battery": "MV Battery",
+  "item.enerjolt.hv_battery": "HV Battery",
+  "item.enerjolt.ev_battery": "EV Battery",
+  "item.enerjolt.iv_battery": "IV Battery",
+  "item.enerjolt.luv_battery": "LuV Battery",
+  "item.enerjolt.zv_battery": "ZV Battery",
+  "item.enerjolt.uv_battery": "UV Battery",
+  "item.enerjolt.creative_battery": "Creative Battery",
+
+  "item.enerjolt.energy_multitool": "Energy Multitool",
+  "item.enerjolt.energy_scanner": "Energy Scanner",
+  "item.enerjolt.energy_debugger": "Energy Debugger",
+
+  "tooltip.enerjolt.energy_tier": "Tier",
+  "tooltip.enerjolt.energy_per_use": "Energy per Use",
+  "tooltip.enerjolt.portable_battery": "Portable Battery",
+  "tooltip.enerjolt.max_io": "Max I/O: %s EU/t",
+
+  "gui.enerjolt.energy": "%s / %s EU",
+  "gui.enerjolt.progress": "Progress: %s%%",
+  "gui.enerjolt.efficiency": "Efficiency: %s%%"
+
 }

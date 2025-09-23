@@ -1,11 +1,8 @@
-// 1.21.1	2025-09-23T20:27:37.28598	Registries
+// 1.21.1	2025-09-23T21:06:08.3980636	Registries
 37b9c7dbbbb875adee662153ad58cbfba9399b0c data/enerjolt/enchantment/breeding.json
 4b9e48de7721c9cb6371182786ba0bcf301982fd data/enerjolt/enchantment/lightning_striker.json
-95cb1b390722416c9b80a4a1f8f7ec60e41951c2 data/enerjolt/neoforge/biome_modifier/add_bismuth_ore.json
-8be902b2b77fdf42fbe50f8b3c89c8190b137473 data/enerjolt/neoforge/biome_modifier/add_end_bismuth_ore.json
 10c11cf0d46612ee57de4cfb01d1583460e9a559 data/enerjolt/neoforge/biome_modifier/add_end_zinc_ore.json
 1be02678045becfb44929f8aa67ea1377862b338 data/enerjolt/neoforge/biome_modifier/add_goji_berry_bush.json
-5a3d4b88d3b416afc9bbc5b2252f5721ab70f3d7 data/enerjolt/neoforge/biome_modifier/add_nether_bismuth_ore.json
 bd4e9459ed2d9711f147542a3992e0c66f700362 data/enerjolt/neoforge/biome_modifier/add_nether_zinc_ore.json
 06d75ec461a015cab4db186233b1400129eb18bf data/enerjolt/neoforge/biome_modifier/add_tree_bloodwood.json
 d01e3e6399789a9ea8401dd38a71df68ffe85034 data/enerjolt/neoforge/biome_modifier/add_zinc_ore.json

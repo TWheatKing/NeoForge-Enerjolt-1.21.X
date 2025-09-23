@@ -6,9 +6,15 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import com.crofty.enerjolt.block.ModEnergyBlocks;
+import com.crofty.enerjolt.energy.EnergyTier;
 
 import java.util.function.Supplier;
 
@@ -96,6 +102,23 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModItems.GECKO_SPAWN_EGG);
 
+                        // Add Energy Tools
+                        output.accept(ModEnergyItems.LV_DRILL);
+                        output.accept(ModEnergyItems.MV_DRILL);
+                        output.accept(ModEnergyItems.HV_DRILL);
+                        output.accept(ModEnergyItems.EV_DRILL);
+
+                        // Add Energy Batteries
+                        output.accept(ModEnergyItems.LV_BATTERY);
+                        output.accept(ModEnergyItems.MV_BATTERY);
+                        output.accept(ModEnergyItems.HV_BATTERY);
+                        output.accept(ModEnergyItems.EV_BATTERY);
+
+                        // Add Advanced Energy Items
+                        output.accept(ModEnergyItems.ENERGY_MULTITOOL);
+                        output.accept(ModEnergyItems.ENERGY_SCANNER);
+                        output.accept(ModEnergyItems.ENERGY_DEBUGGER);
+
                     }).build());
 
     public static final Supplier<CreativeModeTab> ENERJOLT_BLOCK_TAB = CREATIVE_MODE_TAB.register("enerjolt_blocks_tab",
@@ -154,7 +177,124 @@ public class ModCreativeModeTabs {
 
                         output.accept(ModBlocks.GROWTH_CHAMBER.get());
 
+                        // Energy Generators
+                        output.accept(ModEnergyBlocks.LV_GENERATOR);
+                        output.accept(ModEnergyBlocks.MV_GENERATOR);
+                        output.accept(ModEnergyBlocks.HV_GENERATOR);
+                        output.accept(ModEnergyBlocks.EV_GENERATOR);
+                        output.accept(ModEnergyBlocks.CREATIVE_GENERATOR);
+
+                        // Energy Storage
+                        output.accept(ModEnergyBlocks.LV_ENERGY_STORAGE);
+                        output.accept(ModEnergyBlocks.MV_ENERGY_STORAGE);
+                        output.accept(ModEnergyBlocks.HV_ENERGY_STORAGE);
+                        output.accept(ModEnergyBlocks.EV_ENERGY_STORAGE);
+                        output.accept(ModEnergyBlocks.CREATIVE_ENERGY_STORAGE);
+
+                        // Energy Cables
+                        output.accept(ModEnergyBlocks.LV_CABLE);
+                        output.accept(ModEnergyBlocks.MV_CABLE);
+                        output.accept(ModEnergyBlocks.HV_CABLE);
+                        output.accept(ModEnergyBlocks.EV_CABLE);
+                        output.accept(ModEnergyBlocks.CREATIVE_CABLE);
+
+                        // Transformers
+                        output.accept(ModEnergyBlocks.LV_TO_MV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.MV_TO_LV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.MV_TO_HV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.HV_TO_MV_TRANSFORMER);
+
+                        // Advanced Machines
+                        output.accept(ModEnergyBlocks.LV_ELECTRIC_SMELTER);
+                        output.accept(ModEnergyBlocks.MV_ELECTRIC_SMELTER);
+                        output.accept(ModEnergyBlocks.HV_ELECTRIC_SMELTER);
+
+                        // Ultimate Machines
+                        output.accept(ModEnergyBlocks.QUANTUM_PROCESSOR);
+                        output.accept(ModEnergyBlocks.MATTER_FABRICATOR);
+
                     }).build());
+
+    public static final Supplier<CreativeModeTab> ENERGY_TAB = CREATIVE_MODE_TAB.register("energy_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModEnergyBlocks.MV_GENERATOR.get()))
+                    .withTabsBefore(ResourceLocation.fromNamespaceAndPath(Enerjolt.MOD_ID, "enerjolt_blocks_tab"))
+                    .title(Component.translatable("creativetab.enerjolt.energy"))
+                    .displayItems((itemDisplayParameters, output) -> {
+                        // Generators by tier
+                        addEnergyBlocksByTier(output, "generator", ModEnergyBlocks.LV_GENERATOR,
+                                ModEnergyBlocks.MV_GENERATOR, ModEnergyBlocks.HV_GENERATOR,
+                                ModEnergyBlocks.EV_GENERATOR, ModEnergyBlocks.IV_GENERATOR,
+                                ModEnergyBlocks.LUV_GENERATOR, ModEnergyBlocks.ZV_GENERATOR,
+                                ModEnergyBlocks.UV_GENERATOR, ModEnergyBlocks.CREATIVE_GENERATOR);
+
+                        // Storage by tier
+                        addEnergyBlocksByTier(output, "storage", ModEnergyBlocks.LV_ENERGY_STORAGE,
+                                ModEnergyBlocks.MV_ENERGY_STORAGE, ModEnergyBlocks.HV_ENERGY_STORAGE,
+                                ModEnergyBlocks.EV_ENERGY_STORAGE, ModEnergyBlocks.IV_ENERGY_STORAGE,
+                                ModEnergyBlocks.LUV_ENERGY_STORAGE, ModEnergyBlocks.ZV_ENERGY_STORAGE,
+                                ModEnergyBlocks.UV_ENERGY_STORAGE, ModEnergyBlocks.CREATIVE_ENERGY_STORAGE);
+
+                        // Cables by tier
+                        addEnergyBlocksByTier(output, "cable", ModEnergyBlocks.LV_CABLE,
+                                ModEnergyBlocks.MV_CABLE, ModEnergyBlocks.HV_CABLE,
+                                ModEnergyBlocks.EV_CABLE, ModEnergyBlocks.IV_CABLE,
+                                ModEnergyBlocks.LUV_CABLE, ModEnergyBlocks.ZV_CABLE,
+                                ModEnergyBlocks.UV_CABLE, ModEnergyBlocks.CREATIVE_CABLE);
+
+                        // Tools by tier
+                        addEnergyItemsByTier(output, "drill", ModEnergyItems.LV_DRILL,
+                                ModEnergyItems.MV_DRILL, ModEnergyItems.HV_DRILL,
+                                ModEnergyItems.EV_DRILL, ModEnergyItems.IV_DRILL,
+                                ModEnergyItems.LUV_DRILL, ModEnergyItems.ZV_DRILL,
+                                ModEnergyItems.UV_DRILL, ModEnergyItems.CREATIVE_DRILL);
+
+                        // Batteries by tier
+                        addEnergyItemsByTier(output, "battery", ModEnergyItems.LV_BATTERY,
+                                ModEnergyItems.MV_BATTERY, ModEnergyItems.HV_BATTERY,
+                                ModEnergyItems.EV_BATTERY, ModEnergyItems.IV_BATTERY,
+                                ModEnergyItems.LUV_BATTERY, ModEnergyItems.ZV_BATTERY,
+                                ModEnergyItems.UV_BATTERY, ModEnergyItems.CREATIVE_BATTERY);
+
+                        // Transformers
+                        output.accept(ModEnergyBlocks.LV_TO_MV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.MV_TO_LV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.MV_TO_HV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.HV_TO_MV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.HV_TO_EV_TRANSFORMER);
+                        output.accept(ModEnergyBlocks.EV_TO_HV_TRANSFORMER);
+
+                        // Advanced Machines
+                        output.accept(ModEnergyBlocks.LV_ELECTRIC_SMELTER);
+                        output.accept(ModEnergyBlocks.MV_ELECTRIC_SMELTER);
+                        output.accept(ModEnergyBlocks.HV_ELECTRIC_SMELTER);
+                        output.accept(ModEnergyBlocks.EV_ELECTRIC_SMELTER);
+
+                        // Ultimate Technology
+                        output.accept(ModEnergyBlocks.QUANTUM_PROCESSOR);
+                        output.accept(ModEnergyBlocks.MATTER_FABRICATOR);
+
+                        // Debug Tools
+                        output.accept(ModEnergyItems.ENERGY_SCANNER);
+                        output.accept(ModEnergyItems.ENERGY_DEBUGGER);
+                        output.accept(ModEnergyItems.ENERGY_MULTITOOL);
+
+                    }).build());
+
+    @SafeVarargs
+    private static void addEnergyBlocksByTier(CreativeModeTab.Output output, String type,
+                                              DeferredBlock<Block>... blocks) {
+        for (DeferredBlock<Block> block : blocks) {
+            output.accept(block);
+        }
+    }
+
+    @SafeVarargs
+    private static void addEnergyItemsByTier(CreativeModeTab.Output output, String type,
+                                             DeferredItem<Item>... items) {
+        for (DeferredItem<Item> item : items) {
+            output.accept(item);
+        }
+    }
 
 
     public static void register(IEventBus eventBus) {

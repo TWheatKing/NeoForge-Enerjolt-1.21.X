@@ -45,6 +45,11 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
+import com.crofty.enerjolt.block.ModEnergyBlocks;
+import com.crofty.enerjolt.energy.EnergyCapabilityProvider;
+import com.crofty.enerjolt.energy.ModEnergyComponents;
+import com.crofty.enerjolt.item.ModEnergyItems;
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Enerjolt.MOD_ID)
 public class Enerjolt {
@@ -67,6 +72,11 @@ public class Enerjolt {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        // Register Energy System Components
+        ModEnergyComponents.register(modEventBus);
+        ModEnergyBlocks.register(modEventBus);
+        ModEnergyItems.register(modEventBus);
+
         ModDataComponents.register(modEventBus);
         ModSounds.register(modEventBus);
 
@@ -84,6 +94,8 @@ public class Enerjolt {
 
         ModMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
+
+
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
