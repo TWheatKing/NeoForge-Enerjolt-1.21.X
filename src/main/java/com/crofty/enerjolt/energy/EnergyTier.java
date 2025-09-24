@@ -2,6 +2,7 @@ package com.crofty.enerjolt.energy;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -29,9 +30,11 @@ public enum EnergyTier {
     // Special Tiers
     CREATIVE("Creative", "∞", Integer.MAX_VALUE, Integer.MAX_VALUE, 0.0f, 0xFFFF00FF, ChatFormatting.LIGHT_PURPLE);
 
-    // Codec support for data components
+    // Fixed Codec support for data components
     public static final Codec<EnergyTier> CODEC = Codec.STRING.xmap(EnergyTier::valueOf, EnergyTier::name);
-    public static final StreamCodec<?, EnergyTier> STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(EnergyTier::valueOf, EnergyTier::name);
+    public static final StreamCodec<RegistryFriendlyByteBuf, EnergyTier> STREAM_CODEC =
+            StreamCodec.of((buf, tier) -> ByteBufCodecs.STRING_UTF8.encode(buf, tier.name()),
+                    buf -> EnergyTier.valueOf(ByteBufCodecs.STRING_UTF8.decode(buf)));
 
     private final String displayName;
     private final String shortName;
@@ -207,5 +210,21 @@ public enum EnergyTier {
 
         int tierDifference = inputTier.ordinal() - this.ordinal();
         return Math.min(10.0f, tierDifference * 2.0f);
+    }
+
+    /**
+     * Get the maximum transfer rate for this tier
+     * @return Maximum energy transfer per operation
+     */
+    public int getMaxTransfer() {
+        return this.voltage;
+    }
+
+    /**
+     * Get the serialized name for NBT storage
+     * @return Lowercase name of the tier
+     */
+    public String getSerializedName() {
+        return this.name().toLowerCase();
     }
 }

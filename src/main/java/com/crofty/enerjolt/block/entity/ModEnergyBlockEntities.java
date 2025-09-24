@@ -3,6 +3,7 @@ package com.crofty.enerjolt.block.entity;
 import com.crofty.enerjolt.Enerjolt;
 import com.crofty.enerjolt.block.ModEnergyBlocks;
 import com.crofty.enerjolt.block.custom.energy.*;
+import com.crofty.enerjolt.block.entity.energy.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -229,7 +230,7 @@ public static final Supplier<BlockEntityType<GrowthChamberBlockEntity>> GROWTH_C
 /**
  * Enhanced Growth Chamber with Energy Support
  * This extends your existing GrowthChamberBlockEntity
- */
+ *
 class EnhancedGrowthChamberBlockEntity extends com.crofty.enerjolt.block.entity.GrowthChamberBlockEntity
         implements com.crofty.enerjolt.energy.EnergyCapabilityProvider.IEnergyHandler {
 
@@ -241,12 +242,11 @@ class EnhancedGrowthChamberBlockEntity extends com.crofty.enerjolt.block.entity.
         super(pos, blockState);
 
         // Add energy storage capability
-        this.energyStorage = new com.crofty.enerjolt.energy.EnerjoltEnergyStorage(
+        this.energyStorage = new com.crofty.enerjolt.energy.EnergyStorageImpl(
                 10000, // 10k EU capacity
                 com.crofty.enerjolt.energy.EnergyTier.LOW.getVoltage(), // Can receive LV
                 0, // Cannot output energy
-                com.crofty.enerjolt.energy.EnergyTier.LOW,
-                true, false, false // Can receive, cannot extract, no loss
+                com.crofty.enerjolt.energy.EnergyTier.LOW
         );
     }
 
@@ -259,16 +259,19 @@ class EnhancedGrowthChamberBlockEntity extends com.crofty.enerjolt.block.entity.
             if (hasEnergy && useEnergy) {
                 // Energy-powered mode: 3x speed
                 energyStorage.extractEnergy(ENERGY_PER_TICK, false);
-                increaseCraftingProgress(3);
+
+                // Call increaseCraftingProgress() 3 times for 3x speed
+                increaseCraftingProgress();
+                increaseCraftingProgress();
+                increaseCraftingProgress();
 
                 // Particle effects when energy-powered
                 if (level.isClientSide && level.random.nextFloat() < 0.3f) {
-                    level.addParticle(com.crofty.enerjolt.particle.ModParticles.BISMUTH_PARTICLES.get(),
-                            blockPos.getX() + 0.5, blockPos.getY() + 1.0, blockPos.getZ() + 0.5,
-                            0, 0.1, 0);
+                    // Add particle effects if you have them defined
+                    // level.addParticle(ModParticles.ENERGY_PARTICLE.get(), ...);
                 }
             } else {
-                // Normal mode: standard speed
+                // Normal mode: standard speed (call parent method)
                 increaseCraftingProgress();
             }
 
@@ -331,4 +334,5 @@ class EnhancedGrowthChamberBlockEntity extends com.crofty.enerjolt.block.entity.
     public int getEnergyProgress() {
         return (int) (energyStorage.getStoredPercentage() * 100);
     }
-}
+
+*/

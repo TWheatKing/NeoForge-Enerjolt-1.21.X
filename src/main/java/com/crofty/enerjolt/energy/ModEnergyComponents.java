@@ -3,6 +3,7 @@ package com.crofty.enerjolt.energy;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ExtraCodecs;
@@ -28,17 +29,17 @@ public class ModEnergyComponents {
     // Advanced energy storage with tier and efficiency
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<EnergyData>> ENERGY_DATA =
             register("energy_data", builder -> builder.persistent(EnergyData.CODEC)
-                    .networkSynchronized(EnergyData.STREAM_CODEC));
+                    .networkSynchronized((StreamCodec<? super RegistryFriendlyByteBuf, EnergyData>) EnergyData.STREAM_CODEC));
 
     // Energy tier component
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<EnergyTier>> ENERGY_TIER =
             register("energy_tier", builder -> builder.persistent(EnergyTier.CODEC)
-                    .networkSynchronized(EnergyTier.STREAM_CODEC));
+                    .networkSynchronized((StreamCodec<? super RegistryFriendlyByteBuf, EnergyTier>) EnergyTier.STREAM_CODEC));
 
     // Energy configuration for tools/items
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<EnergyConfig>> ENERGY_CONFIG =
             register("energy_config", builder -> builder.persistent(EnergyConfig.CODEC)
-                    .networkSynchronized(EnergyConfig.STREAM_CODEC));
+                    .networkSynchronized((StreamCodec<? super RegistryFriendlyByteBuf, EnergyConfig>) EnergyConfig.STREAM_CODEC));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
@@ -61,7 +62,8 @@ public class ModEnergyComponents {
                         Codec.FLOAT.fieldOf("efficiency").forGetter(EnergyData::efficiency)
                 ).apply(instance, EnergyData::new));
 
-        public static final StreamCodec<?, EnergyData> STREAM_CODEC = StreamCodec.composite(
+        // Fixed StreamCodec - specify the buffer type explicitly
+        public static final StreamCodec<RegistryFriendlyByteBuf, EnergyData> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.VAR_INT, EnergyData::energy,
                 ByteBufCodecs.VAR_INT, EnergyData::capacity,
                 EnergyTier.STREAM_CODEC, EnergyData::tier,
@@ -104,7 +106,8 @@ public class ModEnergyComponents {
                         ExtraCodecs.NON_NEGATIVE_INT.fieldOf("consumeRate").forGetter(EnergyConfig::consumeRate)
                 ).apply(instance, EnergyConfig::new));
 
-        public static final StreamCodec<?, EnergyConfig> STREAM_CODEC = StreamCodec.composite(
+        // Fixed StreamCodec - specify the buffer type explicitly
+        public static final StreamCodec<RegistryFriendlyByteBuf, EnergyConfig> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.VAR_INT, EnergyConfig::maxReceive,
                 ByteBufCodecs.VAR_INT, EnergyConfig::maxExtract,
                 ByteBufCodecs.BOOL, EnergyConfig::canReceive,
@@ -132,18 +135,3 @@ public class ModEnergyComponents {
         }
     }
 }
-
-// Extension for EnergyTier to add codec support
-class EnergyTierCodec {
-    static {
-        // Add codec support to EnergyTier enum
-        EnergyTier.CODEC = Codec.STRING.xmap(EnergyTier::valueOf, EnergyTier::name);
-        EnergyTier.STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(EnergyTier::valueOf, EnergyTier::name);
-    }
-}
-
-// Add to EnergyTier class (this would be added to the EnergyTier enum)
-/*
-public static final Codec<EnergyTier> CODEC = Codec.STRING.xmap(EnergyTier::valueOf, EnergyTier::name);
-public static final StreamCodec<?, EnergyTier> STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(EnergyTier::valueOf, EnergyTier::name);
-*/

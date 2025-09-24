@@ -1,5 +1,6 @@
 package com.crofty.enerjolt.energy;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 
 /**
@@ -87,22 +88,47 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
     }
 
     @Override
+    public float getEfficiency() {
+        return 0;
+    }
+
+    @Override
+    public void setEfficiency(float efficiency) {
+
+    }
+
+    @Override
+    public float getStoredPercentage() {
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public boolean isFull() {
+        return false;
+    }
+
+
     public int getMaxInput() {
         return maxInput;
     }
 
-    @Override
+
     public int getMaxOutput() {
         return maxOutput;
     }
 
     @Override
-    public void setEnergy(int energy) {
+    public void setEnergyStored(int energy) {
         this.energy = Math.max(0, Math.min(capacity, energy));
         onEnergyChanged();
     }
 
-    @Override
+
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("energy", energy);
@@ -113,7 +139,7 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
         return nbt;
     }
 
-    @Override
+
     public void deserializeNBT(CompoundTag nbt) {
         this.energy = nbt.getInt("energy");
         this.capacity = nbt.getInt("capacity");
@@ -131,11 +157,21 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
         onEnergyChanged();
     }
 
-    @Override
+
     public void onEnergyChanged() {
         if (onEnergyChangedCallback != null) {
             onEnergyChangedCallback.run();
         }
+    }
+
+    @Override
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
+        return null;
+    }
+
+    @Override
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
+
     }
 
     /**

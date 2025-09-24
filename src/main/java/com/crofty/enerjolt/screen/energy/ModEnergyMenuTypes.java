@@ -1,10 +1,10 @@
 package com.crofty.enerjolt.screen.energy;
 
 import com.crofty.enerjolt.Enerjolt;
-import com.crofty.enerjolt.block.custom.energy.EnergyGeneratorBlockEntity;
-import com.crofty.enerjolt.block.custom.energy.EnergyStorageBlockEntity;
-import com.crofty.enerjolt.block.custom.energy.EnergyTransformerBlockEntity;
-import com.crofty.enerjolt.block.custom.energy.ElectricSmelterBlockEntity;
+import com.crofty.enerjolt.block.entity.energy.EnergyGeneratorBlockEntity;
+import com.crofty.enerjolt.block.entity.energy.EnergyStorageBlockEntity;
+import com.crofty.enerjolt.block.entity.energy.EnergyTransformerBlockEntity;
+import com.crofty.enerjolt.block.entity.energy.ElectricSmelterBlockEntity;
 import com.crofty.enerjolt.energy.EnergyTier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;

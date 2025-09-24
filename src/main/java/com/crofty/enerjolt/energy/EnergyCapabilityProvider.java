@@ -1,6 +1,9 @@
 package com.crofty.enerjolt.energy;
 
 import com.crofty.enerjolt.Enerjolt;
+import com.crofty.enerjolt.block.entity.ModBlockEntities;
+import com.crofty.enerjolt.block.entity.ModEnergyBlockEntities;
+import com.crofty.enerjolt.item.ModEnergyItems;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -102,24 +105,23 @@ public class EnergyCapabilityProvider {
                     return null;
                 }
                 // Add your energy items here when you create them
-                //ModItems.ENERGY_TOOL.get(),
-                //ModItems.ENERGY_BATTERY.get()
+
         );
     }
 
     private static void registerEnergyBlocks(RegisterCapabilitiesEvent event) {
         // This will be called for each energy block type
         // Example registration (you'll add actual blocks later):
-        /*
+
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
-            ModBlockEntities.ENERGY_GENERATOR_BE.get(),
+            ModEnergyBlockEntities.ENERGY_GENERATOR_BE.get(),
             (blockEntity, direction) -> {
                 if (blockEntity instanceof IEnergyHandler handler) {
                     return handler.getEnergyStorage(direction);
                 }
                 return null;
             });
-        */
+
     }
 
     /**

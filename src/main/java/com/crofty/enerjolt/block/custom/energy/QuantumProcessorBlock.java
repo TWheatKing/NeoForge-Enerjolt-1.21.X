@@ -1,5 +1,6 @@
 package com.crofty.enerjolt.block.custom.energy;
 
+import com.crofty.enerjolt.block.entity.energy.QuantumProcessorBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;

@@ -1,5 +1,6 @@
 package com.crofty.enerjolt.block.custom.energy;
 
+import com.crofty.enerjolt.block.entity.energy.EnergyCableBlockEntity;
 import com.crofty.enerjolt.energy.EnergyCapabilityProvider;
 import com.crofty.enerjolt.energy.EnergyTier;
 import com.crofty.enerjolt.energy.EnerjoltEnergyStorage;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -32,7 +34,6 @@ import java.util.*;
  * Energy Cable Block - Transfers energy between machines
  */
 public class EnergyCableBlock extends BaseEntityBlock {
-    public static final MapCodec<EnergyCableBlock> CODEC = simpleCodec(EnergyCableBlock::new);
 
     // Connection properties for each direction
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
@@ -70,13 +71,13 @@ public class EnergyCableBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(NORTH, SOUTH, EAST, WEST, UP, DOWN);
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, SOUTH, EAST, WEST, UP, DOWN);
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return null;
     }
 
     @Override
@@ -88,12 +89,12 @@ public class EnergyCableBlock extends BaseEntityBlock {
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         VoxelShape shape = CORE_SHAPE;
 
-        if (state.getValue(DOWN)) shape = org.minecraft.world.phys.shapes.Shapes.or(shape, CONNECTION_SHAPES[0]);
-        if (state.getValue(UP)) shape = org.minecraft.world.phys.shapes.Shapes.or(shape, CONNECTION_SHAPES[1]);
-        if (state.getValue(NORTH)) shape = org.minecraft.world.phys.shapes.Shapes.or(shape, CONNECTION_SHAPES[2]);
-        if (state.getValue(SOUTH)) shape = org.minecraft.world.phys.shapes.Shapes.or(shape, CONNECTION_SHAPES[3]);
-        if (state.getValue(WEST)) shape = org.minecraft.world.phys.shapes.Shapes.or(shape, CONNECTION_SHAPES[4]);
-        if (state.getValue(EAST)) shape = org.minecraft.world.phys.shapes.Shapes.or(shape, CONNECTION_SHAPES[5]);
+        if (state.getValue(DOWN)) shape = Shapes.or(shape, CONNECTION_SHAPES[0]);
+        if (state.getValue(UP)) shape = Shapes.or(shape, CONNECTION_SHAPES[1]);
+        if (state.getValue(NORTH)) shape = Shapes.or(shape, CONNECTION_SHAPES[2]);
+        if (state.getValue(SOUTH)) shape = Shapes.or(shape, CONNECTION_SHAPES[3]);
+        if (state.getValue(WEST)) shape = Shapes.or(shape, CONNECTION_SHAPES[4]);
+        if (state.getValue(EAST)) shape = Shapes.or(shape, CONNECTION_SHAPES[5]);
 
         return shape;
     }
@@ -186,245 +187,6 @@ public class EnergyCableBlock extends BaseEntityBlock {
 
     public int getTransferRate() {
         return transferRate;
-    }
-}
-
-/**
- * Block Entity for Energy Cable
- */
-class EnergyCableBlockEntity extends BlockEntity implements EnergyCapabilityProvider.IEnergyHandler {
-
-    private final EnergyTier tier;
-    private final int transferRate;
-    private final EnerjoltEnergyStorage buffer;
-
-    // Connection tracking
-    private final boolean[] connections = new boolean[6]; // DUNSWE
-    private final BlockCapabilityCache<IEnergyStorage, Direction>[] energyCaches;
-
-    // Cable network optimization
-    private CableNetwork network;
-    private int networkUpdateTimer = 0;
-
-    @SuppressWarnings("unchecked")
-    public EnergyCableBlockEntity(BlockPos pos, BlockState state, EnergyTier tier) {
-        super(null, pos, state); // Register block entity type
-        this.tier = tier;
-        this.transferRate = tier.getVoltage();
-
-        // Small buffer to prevent oscillation
-        this.buffer = new EnerjoltEnergyStorage(
-                transferRate, // Buffer size = transfer rate
-                transferRate, // Can receive
-                transferRate, // Can extract
-                tier,
-                true, true, false // No energy loss in cables
-        );
-
-        // Initialize capability caches
-        energyCaches = new BlockCapabilityCache[6];
-        if (level != null) {
-            for (Direction direction : Direction.values()) {
-                energyCaches[direction.get3DDataValue()] = BlockCapabilityCache.create(
-                        Capabilities.EnergyStorage.BLOCK, level, pos.relative(direction), direction.getOpposite());
-            }
-        }
-    }
-
-    public void tick() {
-        if (level == null || level.isClientSide) return;
-
-        // Update network periodically
-        if (++networkUpdateTimer % 20 == 0) { // Every second
-            updateNetwork();
-        }
-
-        // Transfer energy through cable network
-        transferEnergyThroughNetwork();
-
-        setChanged();
-    }
-
-    private void transferEnergyThroughNetwork() {
-        if (network == null) return;
-
-        // Collect all energy sources and sinks
-        List<EnergyNode> sources = new ArrayList<>();
-        List<EnergyNode> sinks = new ArrayList<>();
-
-        for (BlockPos cablePos : network.getCablePositions()) {
-            if (level.getBlockEntity(cablePos) instanceof EnergyCableBlockEntity cable) {
-                cable.collectEnergyNodes(sources, sinks);
-            }
-        }
-
-        // Distribute energy from sources to sinks
-        distributeEnergy(sources, sinks);
-    }
-
-    private void collectEnergyNodes(List<EnergyNode> sources, List<EnergyNode> sinks) {
-        for (Direction direction : Direction.values()) {
-            if (!connections[direction.get3DDataValue()]) continue;
-
-            IEnergyStorage storage = energyCaches[direction.get3DDataValue()].getCapability();
-            if (storage == null) continue;
-
-            if (storage.canExtract() && storage.getEnergyStored() > 0) {
-                sources.add(new EnergyNode(worldPosition.relative(direction), storage, direction.getOpposite()));
-            }
-
-            if (storage.canReceive() && storage.getEnergyStored() < storage.getMaxEnergyStored()) {
-                sinks.add(new EnergyNode(worldPosition.relative(direction), storage, direction.getOpposite()));
-            }
-        }
-    }
-
-    private void distributeEnergy(List<EnergyNode> sources, List<EnergyNode> sinks) {
-        if (sources.isEmpty() || sinks.isEmpty()) return;
-
-        int totalAvailable = sources.stream()
-                .mapToInt(node -> node.storage.extractEnergy(transferRate, true))
-                .sum();
-
-        if (totalAvailable == 0) return;
-
-        int totalCapacity = sinks.stream()
-                .mapToInt(node -> node.storage.receiveEnergy(transferRate, true))
-                .sum();
-
-        int energyToDistribute = Math.min(totalAvailable, totalCapacity);
-        if (energyToDistribute == 0) return;
-
-        // Calculate distribution ratios
-        for (EnergyNode sink : sinks) {
-            int canReceive = sink.storage.receiveEnergy(transferRate, true);
-            if (canReceive == 0) continue;
-
-            float ratio = (float) canReceive / totalCapacity;
-            int energyForThisSink = (int) (energyToDistribute * ratio);
-
-            // Find sources to draw from
-            int remaining = energyForThisSink;
-            for (EnergyNode source : sources) {
-                if (remaining <= 0) break;
-
-                int extracted = source.storage.extractEnergy(remaining, false);
-                if (extracted > 0) {
-                    int received = sink.storage.receiveEnergy(extracted, false);
-                    remaining -= received;
-
-                    // Return any excess energy
-                    if (received < extracted) {
-                        source.storage.receiveEnergy(extracted - received, false);
-                    }
-                }
-            }
-        }
-    }
-
-    public void updateConnections() {
-        if (level == null) return;
-
-        for (Direction direction : Direction.values()) {
-            int index = direction.get3DDataValue();
-            BlockPos neighborPos = worldPosition.relative(direction);
-
-            // Update connection status
-            connections[index] = canConnectInDirection(direction);
-
-            // Update capability cache
-            if (energyCaches[index] != null) {
-                energyCaches[index] = BlockCapabilityCache.create(
-                        Capabilities.EnergyStorage.BLOCK, level, neighborPos, direction.getOpposite());
-            }
-        }
-
-        // Mark network for update
-        if (network != null) {
-            network.markDirty();
-        }
-    }
-
-    private boolean canConnectInDirection(Direction direction) {
-        if (level == null) return false;
-
-        BlockPos neighborPos = worldPosition.relative(direction);
-        BlockEntity neighborEntity = level.getBlockEntity(neighborPos);
-
-        // Check if neighbor is compatible energy handler
-        if (neighborEntity instanceof EnergyCapabilityProvider.IEnergyHandler energyHandler) {
-            return energyHandler.canConnectEnergy(direction.getOpposite()) &&
-                    tier.isCompatibleWith(energyHandler.getEnergyTier());
-        }
-
-        // Check for energy capability
-        IEnergyStorage storage = level.getCapability(Capabilities.EnergyStorage.BLOCK,
-                neighborPos, direction.getOpposite());
-        return storage != null;
-    }
-
-    private void updateNetwork() {
-        if (network == null || network.isDirty()) {
-            network = CableNetwork.buildNetwork(level, worldPosition, tier);
-        }
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.put("Buffer", buffer.serializeNBT(registries));
-
-        // Save connections
-        for (int i = 0; i < 6; i++) {
-            tag.putBoolean("connection_" + i, connections[i]);
-        }
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        buffer.deserializeNBT(registries, tag.getCompound("Buffer"));
-
-        // Load connections
-        for (int i = 0; i < 6; i++) {
-            connections[i] = tag.getBoolean("connection_" + i);
-        }
-    }
-
-    // IEnergyHandler implementation
-    @Override
-    public IEnergyStorage getEnergyStorage(@Nullable Direction direction) {
-        return buffer; // Cables act as pass-through with small buffer
-    }
-
-    @Override
-    public EnergyTier getEnergyTier() {
-        return tier;
-    }
-
-    @Override
-    public boolean canConnectEnergy(@Nullable Direction direction) {
-        if (direction == null) return true;
-        return connections[direction.get3DDataValue()];
-    }
-
-    public boolean isConnected(Direction direction) {
-        return connections[direction.get3DDataValue()];
-    }
-
-    /**
-     * Represents an energy source or sink in the network
-     */
-    private static class EnergyNode {
-        final BlockPos pos;
-        final IEnergyStorage storage;
-        final Direction side;
-
-        EnergyNode(BlockPos pos, IEnergyStorage storage, Direction side) {
-            this.pos = pos;
-            this.storage = storage;
-            this.side = side;
-        }
     }
 }
 

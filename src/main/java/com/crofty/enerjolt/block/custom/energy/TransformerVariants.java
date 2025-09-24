@@ -1,8 +1,7 @@
 package com.crofty.enerjolt.block.custom.energy;
 
 import com.crofty.enerjolt.energy.EnergyTier;
-
-import java.util.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 /**
  * Utility class for creating transformer variants
@@ -12,7 +11,7 @@ public class TransformerVariants {
     /**
      * Create a step-up transformer (low to high voltage)
      */
-    public static EnergyTransformerBlock createStepUp(Properties properties, EnergyTier from, EnergyTier to) {
+    public static EnergyTransformerBlock createStepUp(BlockBehaviour.Properties properties, EnergyTier from, EnergyTier to) {
         if (to.ordinal() <= from.ordinal()) {
             throw new IllegalArgumentException("Step-up transformer requires higher output tier");
         }
@@ -22,7 +21,7 @@ public class TransformerVariants {
     /**
      * Create a step-down transformer (high to low voltage)
      */
-    public static EnergyTransformerBlock createStepDown(Properties properties, EnergyTier from, EnergyTier to) {
+    public static EnergyTransformerBlock createStepDown(BlockBehaviour.Properties properties, EnergyTier from, EnergyTier to) {
         if (to.ordinal() >= from.ordinal()) {
             throw new IllegalArgumentException("Step-down transformer requires lower output tier");
         }
