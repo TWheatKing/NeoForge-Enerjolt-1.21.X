@@ -2,8 +2,8 @@ package com.crofty.enerjolt.block.entity.energy;
 
 import com.crofty.enerjolt.block.entity.ModEnergyBlockEntities;
 import com.crofty.enerjolt.energy.EnergyCapabilityProvider;
+import com.crofty.enerjolt.energy.EnergyStorageImpl;
 import com.crofty.enerjolt.energy.EnergyTier;
-import com.crofty.enerjolt.energy.EnerjoltEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -29,107 +29,39 @@ public class EnergyStorageBlockEntity extends BlockEntity implements MenuProvide
         EnergyCapabilityProvider.IEnergyHandler {
 
     private final EnergyTier tier;
-    private final EnerjoltEnergyStorage energyStorage;
+    private final EnergyStorageImpl energyStorage; // FIXED: Use concrete implementation
     private int lastChargeLevel = -1;
 
     // Capability caches for adjacent blocks
     private final BlockCapabilityCache<IEnergyStorage, Direction>[] energyCaches;
+
+    public EnergyStorageBlockEntity(BlockPos pos, BlockState state) {
+        this(pos, state, EnergyTier.LOW); // Default constructor
+    }
 
     @SuppressWarnings("unchecked")
     public EnergyStorageBlockEntity(BlockPos pos, BlockState state, EnergyTier tier) {
         super(ModEnergyBlockEntities.ENERGY_STORAGE_BE.get(), pos, state);
         this.tier = tier;
 
-        // Create large energy storage
+        // FIXED: Create proper energy storage implementation
         int capacity = calculateCapacity(tier);
         int transferRate = tier.getVoltage() * 2; // Can charge/discharge at 2x voltage
 
-        this.energyStorage = new EnerjoltEnergyStorage(
-        ) {
-            @Override
-            public int receiveEnergy(int i, boolean b) {
-                return 0;
+        this.energyStorage = new EnergyStorageImpl(
+                capacity,     // capacity
+                transferRate, // max input (can receive energy)
+                transferRate, // max output (can extract energy)
+                tier          // energy tier
+        ).setEnergyChangedCallback(() -> {
+            setChanged();
+            if (level != null && !level.isClientSide) {
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             }
-
-            @Override
-            public int extractEnergy(int i, boolean b) {
-                return 0;
-            }
-
-            @Override
-            public int getEnergyStored() {
-                return 0;
-            }
-
-            @Override
-            public int getMaxEnergyStored() {
-                return 0;
-            }
-
-            @Override
-            public boolean canExtract() {
-                return false;
-            }
-
-            @Override
-            public boolean canReceive() {
-                return false;
-            }
-
-            @Override
-            public EnergyTier getTier() {
-                return null;
-            }
-
-            @Override
-            public float getEfficiency() {
-                return 0;
-            }
-
-            @Override
-            public void setEfficiency(float efficiency) {
-
-            }
-
-            @Override
-            public float getStoredPercentage() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean isFull() {
-                return false;
-            }
-
-            @Override
-            public void setEnergyStored(int energy) {
-
-            }
-
-            @Override
-            public CompoundTag serializeNBT(HolderLookup.Provider provider) {
-                return null;
-            }
-
-            @Override
-            public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-
-            }
-        };
+        });
 
         // Initialize capability caches
         energyCaches = new BlockCapabilityCache[6];
-        if (level instanceof ServerLevel serverLevel) {
-            for (Direction direction : Direction.values()) {
-                energyCaches[direction.get3DDataValue()] = BlockCapabilityCache.create(
-                        Capabilities.EnergyStorage.BLOCK, serverLevel, pos.relative(direction), direction.getOpposite());
-            }
-        }
     }
 
     private int calculateCapacity(EnergyTier tier) {
@@ -146,6 +78,10 @@ public class EnergyStorageBlockEntity extends BlockEntity implements MenuProvide
         };
     }
 
+    public static void serverTick(Level level, BlockPos pos, BlockState state, EnergyStorageBlockEntity blockEntity) {
+        blockEntity.tick();
+    }
+
     public void tick() {
         if (level == null || level.isClientSide) return;
 
@@ -154,8 +90,6 @@ public class EnergyStorageBlockEntity extends BlockEntity implements MenuProvide
 
         // Update visual charge level
         updateChargeLevel();
-
-        setChanged();
     }
 
     private void distributeEnergyToAdjacent() {
@@ -164,8 +98,15 @@ public class EnergyStorageBlockEntity extends BlockEntity implements MenuProvide
         int maxTransfer = tier.getVoltage();
 
         for (Direction direction : Direction.values()) {
-            if (energyCaches[direction.get3DDataValue()] != null) {
-                IEnergyStorage consumer = energyCaches[direction.get3DDataValue()].getCapability();
+            if (level instanceof ServerLevel serverLevel) {
+                var cache = BlockCapabilityCache.create(
+                        Capabilities.EnergyStorage.BLOCK,
+                        serverLevel,
+                        worldPosition.relative(direction),
+                        direction.getOpposite()
+                );
+
+                IEnergyStorage consumer = cache.getCapability();
                 if (consumer != null && consumer.canReceive()) {
                     EnergyCapabilityProvider.EnergyUtils.transferEnergy(
                             energyStorage, consumer, maxTransfer);
@@ -178,21 +119,39 @@ public class EnergyStorageBlockEntity extends BlockEntity implements MenuProvide
         int newChargeLevel = (int) (energyStorage.getStoredPercentage() * 8);
         if (newChargeLevel != lastChargeLevel) {
             lastChargeLevel = newChargeLevel;
-            // Update block state with charge level (implement in your block class)
             setChanged();
         }
     }
 
+    // FIXED: Proper NBT serialization with null checks
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.put("Energy", energyStorage.serializeNBT(registries));
+
+        // Add null check to prevent crash
+        if (energyStorage != null) {
+            var serializedEnergy = energyStorage.serializeNBT(registries);
+            if (serializedEnergy != null) {
+                tag.put("Energy", serializedEnergy);
+            }
+        }
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        energyStorage.deserializeNBT(registries, tag.getCompound("Energy"));
+
+        // Add null check and proper tag handling
+        if (energyStorage != null && tag.contains("Energy")) {
+            energyStorage.deserializeNBT(registries, tag.getCompound("Energy"));
+        }
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        saveAdditional(tag, registries);
+        return tag;
     }
 
     @Override
@@ -237,7 +196,7 @@ public class EnergyStorageBlockEntity extends BlockEntity implements MenuProvide
     }
 
     // Public getters
-    public EnerjoltEnergyStorage getEnergyStorageInternal() {
+    public EnergyStorageImpl getEnergyStorageInternal() {
         return energyStorage;
     }
 
@@ -247,5 +206,13 @@ public class EnergyStorageBlockEntity extends BlockEntity implements MenuProvide
 
     public int getChargeLevel() {
         return lastChargeLevel;
+    }
+
+    public int getEnergyStored() {
+        return energyStorage.getEnergyStored();
+    }
+
+    public int getMaxEnergyStored() {
+        return energyStorage.getMaxEnergyStored();
     }
 }

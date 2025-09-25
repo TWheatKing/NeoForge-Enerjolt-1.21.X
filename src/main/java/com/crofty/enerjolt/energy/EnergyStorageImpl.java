@@ -87,36 +87,36 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
         return tier;
     }
 
+    // FIXED: Implement the missing interface methods properly
     @Override
     public float getEfficiency() {
-        return 0;
+        return 1.0f; // Default 100% efficiency
     }
 
     @Override
     public void setEfficiency(float efficiency) {
-
+        // You can add an efficiency field later if needed
+        // For now, this prevents interface implementation errors
     }
 
     @Override
     public float getStoredPercentage() {
-        return 0;
+        return capacity > 0 ? (float) energy / capacity : 0.0f;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return energy <= 0;
     }
 
     @Override
     public boolean isFull() {
-        return false;
+        return energy >= capacity;
     }
-
 
     public int getMaxInput() {
         return maxInput;
     }
-
 
     public int getMaxOutput() {
         return maxOutput;
@@ -128,7 +128,6 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
         onEnergyChanged();
     }
 
-
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
         nbt.putInt("energy", energy);
@@ -138,7 +137,6 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
         nbt.putString("tier", tier.getSerializedName());
         return nbt;
     }
-
 
     public void deserializeNBT(CompoundTag nbt) {
         this.energy = nbt.getInt("energy");
@@ -157,21 +155,21 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
         onEnergyChanged();
     }
 
-
     public void onEnergyChanged() {
         if (onEnergyChangedCallback != null) {
             onEnergyChangedCallback.run();
         }
     }
 
+    // FIXED: The methods that were causing the crash
     @Override
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
-        return null;
+        return serializeNBT(); // Use your existing working method
     }
 
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-
+        deserializeNBT(nbt); // Use your existing working method
     }
 
     /**
@@ -220,5 +218,13 @@ public class EnergyStorageImpl implements EnerjoltEnergyStorage {
      */
     public int getEnergyToReceive() {
         return Math.min(capacity - energy, maxInput);
+    }
+
+    // ADDED: Helper method for generators
+    public int addEnergyInternal(int amount) {
+        int energyAdded = Math.min(capacity - energy, amount);
+        energy += energyAdded;
+        onEnergyChanged();
+        return energyAdded;
     }
 }

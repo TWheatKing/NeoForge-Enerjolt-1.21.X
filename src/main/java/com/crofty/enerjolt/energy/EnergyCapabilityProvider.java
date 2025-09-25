@@ -1,12 +1,10 @@
 package com.crofty.enerjolt.energy;
 
 import com.crofty.enerjolt.Enerjolt;
-import com.crofty.enerjolt.block.entity.ModBlockEntities;
 import com.crofty.enerjolt.block.entity.ModEnergyBlockEntities;
 import com.crofty.enerjolt.item.ModEnergyItems;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -103,25 +101,49 @@ public class EnergyCapabilityProvider {
                         };
                     }
                     return null;
-                }
-                // Add your energy items here when you create them
+                },
+                // ALL ENERGY ITEMS - Batteries
+                ModEnergyItems.LV_BATTERY.get(),
+                ModEnergyItems.MV_BATTERY.get(),
+                ModEnergyItems.HV_BATTERY.get(),
+                ModEnergyItems.EV_BATTERY.get(),
+                ModEnergyItems.IV_BATTERY.get(),
+                ModEnergyItems.LUV_BATTERY.get(),
+                ModEnergyItems.ZV_BATTERY.get(),
+                ModEnergyItems.UV_BATTERY.get(),
+                ModEnergyItems.CREATIVE_BATTERY.get(),
 
+                // Energy Drills
+                ModEnergyItems.LV_DRILL.get(),
+                ModEnergyItems.MV_DRILL.get(),
+                ModEnergyItems.HV_DRILL.get(),
+                ModEnergyItems.EV_DRILL.get(),
+                ModEnergyItems.IV_DRILL.get(),
+                ModEnergyItems.LUV_DRILL.get(),
+                ModEnergyItems.ZV_DRILL.get(),
+                ModEnergyItems.UV_DRILL.get(),
+                ModEnergyItems.CREATIVE_DRILL.get(),
+
+                // Other Energy Items
+                ModEnergyItems.ENERGY_MULTITOOL.get(),
+                ModEnergyItems.ENERGY_SCANNER.get(),
+                ModEnergyItems.ENERGY_DEBUGGER.get()
         );
     }
 
     private static void registerEnergyBlocks(RegisterCapabilitiesEvent event) {
-        // This will be called for each energy block type
-        // Example registration (you'll add actual blocks later):
-
+        // Register for energy generator block entity
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK,
-            ModEnergyBlockEntities.ENERGY_GENERATOR_BE.get(),
-            (blockEntity, direction) -> {
-                if (blockEntity instanceof IEnergyHandler handler) {
-                    return handler.getEnergyStorage(direction);
-                }
-                return null;
-            });
+                ModEnergyBlockEntities.ENERGY_GENERATOR_BE.get(),
+                (blockEntity, direction) -> {
+                    if (blockEntity instanceof IEnergyHandler handler) {
+                        return handler.getEnergyStorage(direction);
+                    }
+                    return null;
+                });
 
+        // Add more block entity registrations as needed for your other energy blocks
+        // when you create their block entities...
     }
 
     /**

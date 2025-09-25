@@ -2,6 +2,7 @@ package com.crofty.enerjolt;
 
 import com.crofty.enerjolt.block.ModBlocks;
 import com.crofty.enerjolt.block.entity.ModBlockEntities;
+import com.crofty.enerjolt.block.entity.ModEnergyBlockEntities;
 import com.crofty.enerjolt.block.entity.renderer.PedestalBlockEntityRenderer;
 import com.crofty.enerjolt.component.ModDataComponents;
 import com.crofty.enerjolt.effect.ModEffects;
@@ -20,6 +21,7 @@ import com.crofty.enerjolt.recipe.ModRecipes;
 import com.crofty.enerjolt.screen.ModMenuTypes;
 import com.crofty.enerjolt.screen.custom.GrowthChamberScreen;
 import com.crofty.enerjolt.screen.custom.PedestalScreen;
+import com.crofty.enerjolt.screen.energy.ModEnergyMenuTypes;
 import com.crofty.enerjolt.sound.ModSounds;
 import com.crofty.enerjolt.util.ModItemProperties;
 import com.crofty.enerjolt.villager.ModVillagers;
@@ -73,11 +75,11 @@ public class Enerjolt {
         ModBlocks.register(modEventBus);
 
         // Register Energy System Components
-        ModEnergyComponents.register(modEventBus);
         ModEnergyBlocks.register(modEventBus);
         ModEnergyItems.register(modEventBus);
 
         ModDataComponents.register(modEventBus);
+        ModEnergyComponents.register(modEventBus);
         ModSounds.register(modEventBus);
 
         ModEffects.register(modEventBus);
@@ -91,14 +93,18 @@ public class Enerjolt {
 
         ModLootModifiers.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModEnergyBlockEntities.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
+        ModEnergyMenuTypes.register(modEventBus);
         ModRecipes.register(modEventBus);
 
 
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+        // Register capability provider
+        modEventBus.addListener(EnergyCapabilityProvider::registerCapabilities);
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

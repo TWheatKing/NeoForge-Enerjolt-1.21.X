@@ -101,7 +101,6 @@ public class EnergyGeneratorBlock extends BaseEntityBlock {
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (state.getBlock() != newState.getBlock()) {
             if (level.getBlockEntity(pos) instanceof EnergyGeneratorBlockEntity generator) {
-                generator.drops();
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }

@@ -93,12 +93,16 @@ public class QuantumProcessorBlockEntity extends BlockEntity implements EnergyCa
 
             @Override
             public CompoundTag serializeNBT(HolderLookup.Provider provider) {
-                return null;
+                CompoundTag nbt = new CompoundTag();
+                nbt.putInt("Energy", this.getEnergyStored());
+                return nbt;
             }
 
             @Override
-            public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-
+            public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
+                if (tag.contains("Energy")) {
+                    this.setEnergyStored(tag.getInt("Energy")); // ✅ correct method
+                }
             }
         };
 

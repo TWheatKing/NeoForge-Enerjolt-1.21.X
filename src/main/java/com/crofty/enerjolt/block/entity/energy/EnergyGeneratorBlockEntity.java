@@ -2,17 +2,14 @@ package com.crofty.enerjolt.block.entity.energy;
 
 import com.crofty.enerjolt.block.entity.ModEnergyBlockEntities;
 import com.crofty.enerjolt.energy.EnergyCapabilityProvider;
+import com.crofty.enerjolt.energy.EnergyStorageImpl;
 import com.crofty.enerjolt.energy.EnergyTier;
-import com.crofty.enerjolt.energy.EnerjoltEnergyStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +29,7 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
         EnergyCapabilityProvider.IEnergyHandler {
 
     private final EnergyTier tier;
-    private final EnerjoltEnergyStorage energyStorage;
+    private final EnergyStorageImpl energyStorage; // FIXED: Use concrete implementation
     private int burnTime = 0;
     private int maxBurnTime = 0;
     private int energyGenerationRate;
@@ -43,100 +40,32 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
     // Cache for nearby energy consumers
     private final BlockCapabilityCache<IEnergyStorage, Direction>[] energyCaches;
 
+    public EnergyGeneratorBlockEntity(BlockPos pos, BlockState state) {
+        this(pos, state, EnergyTier.LOW); // Default constructor
+    }
+
     @SuppressWarnings("unchecked")
     public EnergyGeneratorBlockEntity(BlockPos pos, BlockState state, EnergyTier tier) {
         super(ModEnergyBlockEntities.ENERGY_GENERATOR_BE.get(), pos, state);
         this.tier = tier;
         this.energyGenerationRate = calculateGenerationRate(tier);
 
-        // Create energy storage
-        this.energyStorage = new EnerjoltEnergyStorage(
-                // No energy loss for generators
-        ) {
-            @Override
-            public int receiveEnergy(int i, boolean b) {
-                return 0;
+        // FIXED: Use proper EnergyStorageImpl instead of broken anonymous class
+        int capacity = calculateCapacity(tier);
+        this.energyStorage = new EnergyStorageImpl(
+                capacity,           // capacity
+                0,                  // max input (generators don't receive energy)
+                tier.getVoltage(),  // max output (can extract energy)
+                tier                // energy tier
+        ).setEnergyChangedCallback(() -> {
+            setChanged();
+            if (level != null && !level.isClientSide) {
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             }
-
-            @Override
-            public int extractEnergy(int i, boolean b) {
-                return 0;
-            }
-
-            @Override
-            public int getEnergyStored() {
-                return 0;
-            }
-
-            @Override
-            public int getMaxEnergyStored() {
-                return 0;
-            }
-
-            @Override
-            public boolean canExtract() {
-                return false;
-            }
-
-            @Override
-            public boolean canReceive() {
-                return false;
-            }
-
-            @Override
-            public EnergyTier getTier() {
-                return null;
-            }
-
-            @Override
-            public float getEfficiency() {
-                return 0;
-            }
-
-            @Override
-            public void setEfficiency(float efficiency) {
-
-            }
-
-            @Override
-            public float getStoredPercentage() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean isFull() {
-                return false;
-            }
-
-            @Override
-            public void setEnergyStored(int energy) {
-
-            }
-
-            @Override
-            public CompoundTag serializeNBT(HolderLookup.Provider provider) {
-                return null;
-            }
-
-            @Override
-            public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-
-            }
-        };
+        });
 
         // Initialize capability caches for all directions
         energyCaches = new BlockCapabilityCache[6];
-        if (level instanceof ServerLevel serverLevel) {
-            for (Direction direction : Direction.values()) {
-                energyCaches[direction.get3DDataValue()] = BlockCapabilityCache.create(
-                        Capabilities.EnergyStorage.BLOCK, serverLevel, pos.relative(direction), direction.getOpposite());
-            }
-        }
     }
 
     private int calculateGenerationRate(EnergyTier tier) {
@@ -151,6 +80,24 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
             case ULTIMATE -> 327680; // 327680 EU/t
             case CREATIVE -> Integer.MAX_VALUE; // Infinite
         };
+    }
+
+    private int calculateCapacity(EnergyTier tier) {
+        return switch (tier) {
+            case LOW -> 10000;       // 10k EU
+            case MEDIUM -> 40000;    // 40k EU
+            case HIGH -> 160000;     // 160k EU
+            case EXTREME -> 640000;  // 640k EU
+            case INSANE -> 2560000;  // 2.56M EU
+            case LUDICROUS -> 10240000; // 10.24M EU
+            case ZENITH -> 40960000; // 40.96M EU
+            case ULTIMATE -> 163840000; // 163.84M EU
+            case CREATIVE -> Integer.MAX_VALUE; // Infinite
+        };
+    }
+
+    public static void serverTick(Level level, BlockPos pos, BlockState state, EnergyGeneratorBlockEntity blockEntity) {
+        blockEntity.tick();
     }
 
     public void tick() {
@@ -172,16 +119,14 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
 
         // Update block state if generation status changed
         if (wasGenerating != isGenerating()) {
-            // Update block state (implement in your block class)
             setChanged();
         }
-
-        setChanged();
     }
 
     private void generateEnergy() {
         if (energyStorage.getEnergyStored() < energyStorage.getMaxEnergyStored()) {
-            energyStorage.receiveEnergy(energyGenerationRate, false);
+            // FIXED: Use addEnergyInternal instead of broken receiveEnergy
+            energyStorage.addEnergyInternal(energyGenerationRate);
         }
     }
 
@@ -200,8 +145,15 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
         if (energyPerDirection == 0) return;
 
         for (Direction direction : Direction.values()) {
-            if (energyCaches[direction.get3DDataValue()] != null) {
-                IEnergyStorage consumer = energyCaches[direction.get3DDataValue()].getCapability();
+            if (level instanceof ServerLevel serverLevel) {
+                var cache = BlockCapabilityCache.create(
+                        Capabilities.EnergyStorage.BLOCK,
+                        serverLevel,
+                        worldPosition.relative(direction),
+                        direction.getOpposite()
+                );
+
+                IEnergyStorage consumer = cache.getCapability();
                 if (consumer != null && consumer.canReceive()) {
                     EnergyCapabilityProvider.EnergyUtils.transferEnergy(
                             energyStorage, consumer, Math.min(energyPerDirection, tier.getVoltage()));
@@ -222,15 +174,19 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
         return (int) (energyStorage.getStoredPercentage() * 100);
     }
 
-    public void drops() {
-        // Drop items when block is broken
-        // Implementation depends on your item system
-    }
-
+    // FIXED: Proper NBT serialization with null checks
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.put("Energy", energyStorage.serializeNBT(registries));
+
+        // Add null check to prevent crash
+        if (energyStorage != null) {
+            var serializedEnergy = energyStorage.serializeNBT(registries);
+            if (serializedEnergy != null) {
+                tag.put("Energy", serializedEnergy);
+            }
+        }
+
         tag.putInt("BurnTime", burnTime);
         tag.putInt("MaxBurnTime", maxBurnTime);
         tag.putInt("FuelValue", fuelValue);
@@ -239,10 +195,22 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        energyStorage.deserializeNBT(registries, tag.getCompound("Energy"));
+
+        // Add null check and proper tag handling
+        if (energyStorage != null && tag.contains("Energy")) {
+            energyStorage.deserializeNBT(registries, tag.getCompound("Energy"));
+        }
+
         burnTime = tag.getInt("BurnTime");
         maxBurnTime = tag.getInt("MaxBurnTime");
         fuelValue = tag.getInt("FuelValue");
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        saveAdditional(tag, registries);
+        return tag;
     }
 
     @Override
@@ -289,7 +257,7 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
     }
 
     // Public getters for GUI
-    public EnerjoltEnergyStorage getEnergyStorageInternal() {
+    public EnergyStorageImpl getEnergyStorageInternal() {
         return energyStorage;
     }
 
@@ -304,5 +272,13 @@ public class EnergyGeneratorBlockEntity extends BlockEntity implements MenuProvi
 
     public int getFuelRemaining() {
         return fuelValue;
+    }
+
+    public int getEnergyStored() {
+        return energyStorage.getEnergyStored();
+    }
+
+    public int getMaxEnergyStored() {
+        return energyStorage.getMaxEnergyStored();
     }
 }
